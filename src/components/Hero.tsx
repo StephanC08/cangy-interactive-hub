@@ -41,7 +41,7 @@ const Hero: React.FC = () => {
             <div className="relative">
               <div className="w-64 h-64 md:w-80 md:h-80 bg-gold/10 rounded-full absolute -top-4 -left-4"></div>
               <img
-                src="/profile.jpg"
+                src="/lovable-uploads/a0bca79c-615a-4b2f-9c67-101f7f821c66.png"
                 alt="Stephan CANGY"
                 className="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full border-4 border-gold/30 relative z-10"
               />
