@@ -1,6 +1,6 @@
 
 import React from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Monitor, Users, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface MobileMenuProps {
@@ -21,7 +21,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
       <div className="flex flex-col mt-4 space-y-4 pb-4">
         <div className="relative group">
           <button
-            className="text-white py-2 hover:text-gold transition-colors w-full text-left flex items-center justify-between"
+            className="text-white py-2 hover:text-mauve transition-colors w-full text-left flex items-center justify-between"
             onClick={() => {
               const subMenu = document.getElementById('servicesSubMenu');
               if (subMenu) {
@@ -35,33 +35,36 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
           <div id="servicesSubMenu" className="hidden pl-4 pt-2 space-y-3">
             <button
               onClick={() => scrollToSection('services')}
-              className="text-gray-300 py-2 hover:text-gold transition-colors w-full text-left block"
+              className="text-gray-300 py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
             >
-              Développement Web
+              <Monitor size={16} className="text-mauve mr-2" />
+              <span>Développement Web</span>
             </button>
             <button
               onClick={() => scrollToSection('services')}
-              className="text-gray-300 py-2 hover:text-gold transition-colors w-full text-left block"
+              className="text-gray-300 py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
             >
-              Coaching & Accompagnement
+              <Users size={16} className="text-mauve mr-2" />
+              <span>Coaching & Accompagnement</span>
             </button>
             <button
               onClick={() => scrollToSection('services')}
-              className="text-gray-300 py-2 hover:text-gold transition-colors w-full text-left block"
+              className="text-gray-300 py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
             >
-              Conseil Immobilier
+              <Home size={16} className="text-mauve mr-2" />
+              <span>Conseil Immobilier</span>
             </button>
           </div>
         </div>
         <button
           onClick={() => scrollToSection('about')}
-          className="text-white py-2 hover:text-gold transition-colors"
+          className="text-white py-2 hover:text-mauve transition-colors"
         >
           À propos
         </button>
         <button
           onClick={() => scrollToSection('testimonials')}
-          className="text-white py-2 hover:text-gold transition-colors"
+          className="text-white py-2 hover:text-mauve transition-colors"
         >
           Témoignages
         </button>

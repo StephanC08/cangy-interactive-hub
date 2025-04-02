@@ -6,21 +6,21 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 
 const serviceData = [
   {
-    icon: <Monitor className="h-12 w-12 text-gold" />,
+    icon: <Monitor className="h-12 w-12 text-mauve" />,
     title: "Développement Web",
     description: "Création de sites web performants et sur mesure pour développer votre présence en ligne et attirer de nouveaux clients.",
     features: ["Sites vitrines professionnels", "E-commerce performants", "Applications web sur mesure", "Audits et optimisation SEO"],
     buttonText: "En savoir plus",
   },
   {
-    icon: <Users className="h-12 w-12 text-gold" />,
+    icon: <Users className="h-12 w-12 text-mauve" />,
     title: "Coaching & Accompagnement",
     description: "Suivi personnalisé pour vous aider à atteindre vos objectifs professionnels et personnels avec des stratégies efficaces.",
     features: ["Développement personnel", "Stratégie d'entreprise", "Productivité et organisation", "Transition professionnelle"],
     buttonText: "Découvrir",
   },
   {
-    icon: <Home className="h-12 w-12 text-gold" />,
+    icon: <Home className="h-12 w-12 text-mauve" />,
     title: "Conseil Immobilier",
     description: "Stratégies et solutions adaptées pour vendeurs et acquéreurs dans la région de Thonon-les-Bains et ses environs.",
     features: ["Estimations précises", "Conseils personnalisés", "Accompagnement complet", "Stratégie d'investissement"],
@@ -44,7 +44,7 @@ const Services: React.FC = () => {
             <Card key={index} className="card-service animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
               <CardHeader>
                 <div className="mb-4">{service.icon}</div>
-                <CardTitle className="text-xl text-white">{service.title}</CardTitle>
+                <CardTitle className="text-2xl text-white">{service.title}</CardTitle>
                 <CardDescription className="text-gray-400">
                   {service.description}
                 </CardDescription>
@@ -53,7 +53,7 @@ const Services: React.FC = () => {
                 <ul className="space-y-2">
                   {service.features.map((feature, i) => (
                     <li key={i} className="flex items-start">
-                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-mauve flex-shrink-0"></div>
                       <span className="text-gray-300 text-sm">{feature}</span>
                     </li>
                   ))}
