@@ -28,7 +28,6 @@ const Appointment: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [message, setMessage] = useState<string>('');
-  const [currentTab, setCurrentTab] = useState<string>('developpement');
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -87,125 +86,125 @@ const Appointment: React.FC = () => {
           <Card className="lg:col-span-3 card-service p-6 animate-fade-in">
             <form onSubmit={handleSubmit}>
               <div className="mb-6">
-                <Tabs defaultValue="developpement" onValueChange={setCurrentTab}>
+                <Tabs defaultValue="developpement">
                   <TabsList className="w-full grid grid-cols-3">
                     <TabsTrigger value="developpement">Développement Web</TabsTrigger>
                     <TabsTrigger value="coaching">Coaching</TabsTrigger>
                     <TabsTrigger value="immobilier">Immobilier</TabsTrigger>
                   </TabsList>
-                </Tabs>
-              </div>
-
-              <div className="space-y-6">
-                <div>
-                  <Label htmlFor="name">Nom complet</Label>
-                  <Input
-                    id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Votre nom et prénom"
-                    className="bg-noir border-gold/20 mt-1 text-white"
-                    required
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="votre.email@example.com"
-                      className="bg-noir border-gold/20 mt-1 text-white"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="phone">Téléphone</Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      placeholder="+33 6 XX XX XX XX"
-                      className="bg-noir border-gold/20 mt-1 text-white"
-                    />
-                  </div>
-                </div>
-
-                <Separator className="bg-gold/10" />
-
-                <div>
-                  <Label>Type d'entretien</Label>
-                  <div className="grid grid-cols-3 gap-3 mt-2">
-                    {meetingTypes.map((type) => (
-                      <button
-                        key={type.id}
-                        type="button"
-                        onClick={() => setSelectedType(type.id)}
-                        className={`flex flex-col items-center justify-center p-3 rounded-lg border transition-all ${
-                          selectedType === type.id
-                            ? 'border-gold bg-gold/10 text-gold'
-                            : 'border-gray-700 text-gray-400 hover:border-gray-500'
-                        }`}
-                      >
-                        {type.icon}
-                        <span className="mt-2 text-sm">{type.label}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="date">Date</Label>
-                    <Select value={selectedDate} onValueChange={setSelectedDate}>
-                      <SelectTrigger className="bg-noir border-gold/20 mt-1 text-white">
-                        <SelectValue placeholder="Sélectionnez une date" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {generateDateOptions().map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
                   
-                  <div>
-                    <Label htmlFor="time">Heure</Label>
-                    <Select value={selectedTime} onValueChange={setSelectedTime}>
-                      <SelectTrigger className="bg-noir border-gold/20 mt-1 text-white">
-                        <SelectValue placeholder="Sélectionnez une heure" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {timeSlots.map((time) => (
-                          <SelectItem key={time} value={time}>
-                            {time}
-                          </SelectItem>
+                  <div className="space-y-6 mt-6">
+                    <div>
+                      <Label htmlFor="name">Nom complet</Label>
+                      <Input
+                        id="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Votre nom et prénom"
+                        className="bg-noir border-gold/20 mt-1 text-white"
+                        required
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="email">Email</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="votre.email@example.com"
+                          className="bg-noir border-gold/20 mt-1 text-white"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="phone">Téléphone</Label>
+                        <Input
+                          id="phone"
+                          type="tel"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          placeholder="+33 6 XX XX XX XX"
+                          className="bg-noir border-gold/20 mt-1 text-white"
+                        />
+                      </div>
+                    </div>
+
+                    <Separator className="bg-gold/10" />
+
+                    <div>
+                      <Label>Type d'entretien</Label>
+                      <div className="grid grid-cols-3 gap-3 mt-2">
+                        {meetingTypes.map((type) => (
+                          <button
+                            key={type.id}
+                            type="button"
+                            onClick={() => setSelectedType(type.id)}
+                            className={`flex flex-col items-center justify-center p-3 rounded-lg border transition-all ${
+                              selectedType === type.id
+                                ? 'border-gold bg-gold/10 text-gold'
+                                : 'border-gray-700 text-gray-400 hover:border-gray-500'
+                            }`}
+                          >
+                            {type.icon}
+                            <span className="mt-2 text-sm">{type.label}</span>
+                          </button>
                         ))}
-                      </SelectContent>
-                    </Select>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="date">Date</Label>
+                        <Select value={selectedDate} onValueChange={setSelectedDate}>
+                          <SelectTrigger className="bg-noir border-gold/20 mt-1 text-white">
+                            <SelectValue placeholder="Sélectionnez une date" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {generateDateOptions().map((option) => (
+                              <SelectItem key={option.value} value={option.value}>
+                                {option.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      <div>
+                        <Label htmlFor="time">Heure</Label>
+                        <Select value={selectedTime} onValueChange={setSelectedTime}>
+                          <SelectTrigger className="bg-noir border-gold/20 mt-1 text-white">
+                            <SelectValue placeholder="Sélectionnez une heure" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {timeSlots.map((time) => (
+                              <SelectItem key={time} value={time}>
+                                {time}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="message">Message (facultatif)</Label>
+                      <Input
+                        id="message"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        placeholder="Précisez vos besoins ou questions..."
+                        className="bg-noir border-gold/20 mt-1 text-white"
+                      />
+                    </div>
+
+                    <Button type="submit" className="btn-primary w-full">
+                      Confirmer le rendez-vous
+                    </Button>
                   </div>
-                </div>
-
-                <div>
-                  <Label htmlFor="message">Message (facultatif)</Label>
-                  <Input
-                    id="message"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Précisez vos besoins ou questions..."
-                    className="bg-noir border-gold/20 mt-1 text-white"
-                  />
-                </div>
-
-                <Button type="submit" className="btn-primary w-full">
-                  Confirmer le rendez-vous
-                </Button>
+                </Tabs>
               </div>
             </form>
           </Card>
@@ -234,86 +233,88 @@ const Appointment: React.FC = () => {
               </div>
             </Card>
 
-            <TabsContent value="developpement" className={currentTab === "developpement" ? "block animate-fade-in" : "hidden"}>
-              <Card className="card-service p-6">
-                <h3 className="text-gold font-medium text-lg mb-2">Consultation Web</h3>
-                <p className="text-gray-400 text-sm mb-4">
-                  Discutons de votre projet web et des solutions adaptées à vos besoins et objectifs.
-                </p>
-                <ul className="space-y-2">
-                  <li className="flex items-start">
-                    <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
-                    <span className="text-gray-300 text-sm">Analyse de vos besoins</span>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
-                    <span className="text-gray-300 text-sm">Conseils sur les technologies</span>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
-                    <span className="text-gray-300 text-sm">Estimation budgétaire</span>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
-                    <span className="text-gray-300 text-sm">Planification du projet</span>
-                  </li>
-                </ul>
-              </Card>
-            </TabsContent>
+            <Tabs defaultValue="developpement">
+              <TabsContent value="developpement" className="animate-fade-in">
+                <Card className="card-service p-6">
+                  <h3 className="text-gold font-medium text-lg mb-2">Consultation Web</h3>
+                  <p className="text-gray-400 text-sm mb-4">
+                    Discutons de votre projet web et des solutions adaptées à vos besoins et objectifs.
+                  </p>
+                  <ul className="space-y-2">
+                    <li className="flex items-start">
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <span className="text-gray-300 text-sm">Analyse de vos besoins</span>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <span className="text-gray-300 text-sm">Conseils sur les technologies</span>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <span className="text-gray-300 text-sm">Estimation budgétaire</span>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <span className="text-gray-300 text-sm">Planification du projet</span>
+                    </li>
+                  </ul>
+                </Card>
+              </TabsContent>
 
-            <TabsContent value="coaching" className={currentTab === "coaching" ? "block animate-fade-in" : "hidden"}>
-              <Card className="card-service p-6">
-                <h3 className="text-gold font-medium text-lg mb-2">Session de Coaching</h3>
-                <p className="text-gray-400 text-sm mb-4">
-                  Définissons ensemble vos objectifs et élaborons un plan d'action personnalisé.
-                </p>
-                <ul className="space-y-2">
-                  <li className="flex items-start">
-                    <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
-                    <span className="text-gray-300 text-sm">Évaluation de la situation actuelle</span>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
-                    <span className="text-gray-300 text-sm">Identification des objectifs</span>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
-                    <span className="text-gray-300 text-sm">Stratégies de développement</span>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
-                    <span className="text-gray-300 text-sm">Suivi et accompagnement</span>
-                  </li>
-                </ul>
-              </Card>
-            </TabsContent>
+              <TabsContent value="coaching" className="animate-fade-in">
+                <Card className="card-service p-6">
+                  <h3 className="text-gold font-medium text-lg mb-2">Session de Coaching</h3>
+                  <p className="text-gray-400 text-sm mb-4">
+                    Définissons ensemble vos objectifs et élaborons un plan d'action personnalisé.
+                  </p>
+                  <ul className="space-y-2">
+                    <li className="flex items-start">
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <span className="text-gray-300 text-sm">Évaluation de la situation actuelle</span>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <span className="text-gray-300 text-sm">Identification des objectifs</span>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <span className="text-gray-300 text-sm">Stratégies de développement</span>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <span className="text-gray-300 text-sm">Suivi et accompagnement</span>
+                    </li>
+                  </ul>
+                </Card>
+              </TabsContent>
 
-            <TabsContent value="immobilier" className={currentTab === "immobilier" ? "block animate-fade-in" : "hidden"}>
-              <Card className="card-service p-6">
-                <h3 className="text-gold font-medium text-lg mb-2">Conseil Immobilier</h3>
-                <p className="text-gray-400 text-sm mb-4">
-                  Explorons ensemble vos projets immobiliers à Thonon-les-Bains et dans la région.
-                </p>
-                <ul className="space-y-2">
-                  <li className="flex items-start">
-                    <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
-                    <span className="text-gray-300 text-sm">Estimation de bien</span>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
-                    <span className="text-gray-300 text-sm">Recherche personnalisée</span>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
-                    <span className="text-gray-300 text-sm">Conseils d'investissement</span>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
-                    <span className="text-gray-300 text-sm">Accompagnement transaction</span>
-                  </li>
-                </ul>
-              </Card>
-            </TabsContent>
+              <TabsContent value="immobilier" className="animate-fade-in">
+                <Card className="card-service p-6">
+                  <h3 className="text-gold font-medium text-lg mb-2">Conseil Immobilier</h3>
+                  <p className="text-gray-400 text-sm mb-4">
+                    Explorons ensemble vos projets immobiliers à Thonon-les-Bains et dans la région.
+                  </p>
+                  <ul className="space-y-2">
+                    <li className="flex items-start">
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <span className="text-gray-300 text-sm">Estimation de bien</span>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <span className="text-gray-300 text-sm">Recherche personnalisée</span>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <span className="text-gray-300 text-sm">Conseils d'investissement</span>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <span className="text-gray-300 text-sm">Accompagnement transaction</span>
+                    </li>
+                  </ul>
+                </Card>
+              </TabsContent>
+            </Tabs>
           </div>
         </div>
       </div>
