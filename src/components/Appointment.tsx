@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Calendar, Clock, Users, Video, Phone, MapPin, Check } from 'lucide-react';
+import { Calendar, Clock, Phone, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -14,16 +14,9 @@ const timeSlots = [
   "09:00", "10:00", "11:00", "14:00", "15:00", "16:00", "17:00"
 ];
 
-const meetingTypes = [
-  { id: 'video', icon: <Video size={20} />, label: 'Visioconférence' },
-  { id: 'phone', icon: <Phone size={20} />, label: 'Téléphone' },
-  { id: 'in-person', icon: <MapPin size={20} />, label: 'En personne' },
-];
-
 const Appointment: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
-  const [selectedType, setSelectedType] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
@@ -40,7 +33,6 @@ const Appointment: React.FC = () => {
     // Reset form
     setSelectedDate('');
     setSelectedTime('');
-    setSelectedType('');
     setName('');
     setEmail('');
     setPhone('');
@@ -101,7 +93,7 @@ const Appointment: React.FC = () => {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Votre nom et prénom"
-                        className="bg-noir border-gold/20 mt-1 text-white"
+                        className="bg-noir border-mauve/20 mt-1 text-white"
                         required
                       />
                     </div>
@@ -115,7 +107,7 @@ const Appointment: React.FC = () => {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="votre.email@example.com"
-                          className="bg-noir border-gold/20 mt-1 text-white"
+                          className="bg-noir border-mauve/20 mt-1 text-white"
                           required
                         />
                       </div>
@@ -127,31 +119,19 @@ const Appointment: React.FC = () => {
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           placeholder="+33 6 XX XX XX XX"
-                          className="bg-noir border-gold/20 mt-1 text-white"
+                          className="bg-noir border-mauve/20 mt-1 text-white"
+                          required
                         />
                       </div>
                     </div>
 
-                    <Separator className="bg-gold/10" />
+                    <Separator className="bg-mauve/10" />
 
                     <div>
                       <Label>Type d'entretien</Label>
-                      <div className="grid grid-cols-3 gap-3 mt-2">
-                        {meetingTypes.map((type) => (
-                          <button
-                            key={type.id}
-                            type="button"
-                            onClick={() => setSelectedType(type.id)}
-                            className={`flex flex-col items-center justify-center p-3 rounded-lg border transition-all ${
-                              selectedType === type.id
-                                ? 'border-gold bg-gold/10 text-gold'
-                                : 'border-gray-700 text-gray-400 hover:border-gray-500'
-                            }`}
-                          >
-                            {type.icon}
-                            <span className="mt-2 text-sm">{type.label}</span>
-                          </button>
-                        ))}
+                      <div className="flex items-center p-3 rounded-lg border border-mauve/20 bg-noir mt-2">
+                        <Phone size={20} className="text-mauve mr-3" />
+                        <span className="text-white">Téléphone uniquement</span>
                       </div>
                     </div>
 
@@ -159,7 +139,7 @@ const Appointment: React.FC = () => {
                       <div>
                         <Label htmlFor="date">Date</Label>
                         <Select value={selectedDate} onValueChange={setSelectedDate}>
-                          <SelectTrigger className="bg-noir border-gold/20 mt-1 text-white">
+                          <SelectTrigger className="bg-noir border-mauve/20 mt-1 text-white">
                             <SelectValue placeholder="Sélectionnez une date" />
                           </SelectTrigger>
                           <SelectContent>
@@ -175,7 +155,7 @@ const Appointment: React.FC = () => {
                       <div>
                         <Label htmlFor="time">Heure</Label>
                         <Select value={selectedTime} onValueChange={setSelectedTime}>
-                          <SelectTrigger className="bg-noir border-gold/20 mt-1 text-white">
+                          <SelectTrigger className="bg-noir border-mauve/20 mt-1 text-white">
                             <SelectValue placeholder="Sélectionnez une heure" />
                           </SelectTrigger>
                           <SelectContent>
@@ -196,7 +176,7 @@ const Appointment: React.FC = () => {
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         placeholder="Précisez vos besoins ou questions..."
-                        className="bg-noir border-gold/20 mt-1 text-white"
+                        className="bg-noir border-mauve/20 mt-1 text-white"
                       />
                     </div>
 
@@ -212,7 +192,7 @@ const Appointment: React.FC = () => {
           <div className="lg:col-span-2">
             <Card className="card-service p-6 animate-fade-in animation-delay-200 mb-6">
               <div className="flex items-start mb-4">
-                <Calendar className="text-gold mr-4" size={24} />
+                <Calendar className="text-mauve mr-4" size={24} />
                 <div>
                   <h3 className="text-white font-medium text-lg">Disponibilités</h3>
                   <p className="text-gray-400 text-sm">
@@ -220,14 +200,14 @@ const Appointment: React.FC = () => {
                   </p>
                 </div>
               </div>
-              <Separator className="bg-gold/10 mb-4" />
+              <Separator className="bg-mauve/10 mb-4" />
               <div className="grid grid-cols-2 gap-3">
                 <div className="flex items-center text-gray-300 text-sm">
-                  <Clock size={16} className="mr-2 text-gold" />
+                  <Clock size={16} className="mr-2 text-mauve" />
                   <span>Durée: 45 min</span>
                 </div>
                 <div className="flex items-center text-gray-300 text-sm">
-                  <Check size={16} className="mr-2 text-gold" />
+                  <Check size={16} className="mr-2 text-mauve" />
                   <span>Confirmation par email</span>
                 </div>
               </div>
@@ -236,25 +216,25 @@ const Appointment: React.FC = () => {
             <Tabs defaultValue="developpement">
               <TabsContent value="developpement" className="animate-fade-in">
                 <Card className="card-service p-6">
-                  <h3 className="text-gold font-medium text-lg mb-2">Consultation Web</h3>
+                  <h3 className="text-mauve font-medium text-lg mb-2">Consultation Web</h3>
                   <p className="text-gray-400 text-sm mb-4">
                     Discutons de votre projet web et des solutions adaptées à vos besoins et objectifs.
                   </p>
                   <ul className="space-y-2">
                     <li className="flex items-start">
-                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-mauve flex-shrink-0"></div>
                       <span className="text-gray-300 text-sm">Analyse de vos besoins</span>
                     </li>
                     <li className="flex items-start">
-                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-mauve flex-shrink-0"></div>
                       <span className="text-gray-300 text-sm">Conseils sur les technologies</span>
                     </li>
                     <li className="flex items-start">
-                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-mauve flex-shrink-0"></div>
                       <span className="text-gray-300 text-sm">Estimation budgétaire</span>
                     </li>
                     <li className="flex items-start">
-                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-mauve flex-shrink-0"></div>
                       <span className="text-gray-300 text-sm">Planification du projet</span>
                     </li>
                   </ul>
@@ -263,25 +243,25 @@ const Appointment: React.FC = () => {
 
               <TabsContent value="coaching" className="animate-fade-in">
                 <Card className="card-service p-6">
-                  <h3 className="text-gold font-medium text-lg mb-2">Session de Coaching</h3>
+                  <h3 className="text-mauve font-medium text-lg mb-2">Session de Coaching</h3>
                   <p className="text-gray-400 text-sm mb-4">
                     Définissons ensemble vos objectifs et élaborons un plan d'action personnalisé.
                   </p>
                   <ul className="space-y-2">
                     <li className="flex items-start">
-                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-mauve flex-shrink-0"></div>
                       <span className="text-gray-300 text-sm">Évaluation de la situation actuelle</span>
                     </li>
                     <li className="flex items-start">
-                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-mauve flex-shrink-0"></div>
                       <span className="text-gray-300 text-sm">Identification des objectifs</span>
                     </li>
                     <li className="flex items-start">
-                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-mauve flex-shrink-0"></div>
                       <span className="text-gray-300 text-sm">Stratégies de développement</span>
                     </li>
                     <li className="flex items-start">
-                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-mauve flex-shrink-0"></div>
                       <span className="text-gray-300 text-sm">Suivi et accompagnement</span>
                     </li>
                   </ul>
@@ -290,25 +270,25 @@ const Appointment: React.FC = () => {
 
               <TabsContent value="immobilier" className="animate-fade-in">
                 <Card className="card-service p-6">
-                  <h3 className="text-gold font-medium text-lg mb-2">Conseil Immobilier</h3>
+                  <h3 className="text-mauve font-medium text-lg mb-2">Conseil Immobilier</h3>
                   <p className="text-gray-400 text-sm mb-4">
                     Explorons ensemble vos projets immobiliers à Thonon-les-Bains et dans la région.
                   </p>
                   <ul className="space-y-2">
                     <li className="flex items-start">
-                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-mauve flex-shrink-0"></div>
                       <span className="text-gray-300 text-sm">Estimation de bien</span>
                     </li>
                     <li className="flex items-start">
-                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-mauve flex-shrink-0"></div>
                       <span className="text-gray-300 text-sm">Recherche personnalisée</span>
                     </li>
                     <li className="flex items-start">
-                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-mauve flex-shrink-0"></div>
                       <span className="text-gray-300 text-sm">Conseils d'investissement</span>
                     </li>
                     <li className="flex items-start">
-                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0"></div>
+                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-mauve flex-shrink-0"></div>
                       <span className="text-gray-300 text-sm">Accompagnement transaction</span>
                     </li>
                   </ul>

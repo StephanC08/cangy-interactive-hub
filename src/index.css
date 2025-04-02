@@ -16,7 +16,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 7%;
 
-    --primary: 45 65% 52%;
+    --primary: 265 65% 60%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 12%;
@@ -25,7 +25,7 @@
     --muted: 0 0% 90%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 45 65% 52%;
+    --accent: 265 65% 60%;
     --accent-foreground: 0 0% 7%;
 
     --destructive: 0 84.2% 60.2%;
@@ -33,7 +33,7 @@
 
     --border: 0 0% 88%;
     --input: 0 0% 85%;
-    --ring: 45 65% 52%;
+    --ring: 265 65% 60%;
 
     --radius: 0.5rem;
   }
@@ -48,7 +48,7 @@
     --popover: 0 0% 9%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 45 65% 52%;
+    --primary: 265 65% 60%;
     --primary-foreground: 0 0% 9%;
 
     --secondary: 0 0% 12%;
@@ -57,7 +57,7 @@
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 65%;
 
-    --accent: 45 65% 52%;
+    --accent: 265 65% 60%;
     --accent-foreground: 0 0% 9%;
 
     --destructive: 0 62.8% 30.6%;
@@ -65,7 +65,7 @@
 
     --border: 0 0% 20%;
     --input: 0 0% 20%;
-    --ring: 45 65% 52%;
+    --ring: 265 65% 60%;
   }
 }
 
@@ -87,11 +87,11 @@
   }
   
   .section-title::after {
-    @apply content-[''] absolute left-0 -bottom-2 w-20 h-1 bg-gold;
+    @apply content-[''] absolute left-0 -bottom-2 w-20 h-1 bg-mauve;
   }
   
   .section-subtitle {
-    @apply text-xl md:text-2xl font-heading font-semibold text-gold mb-4;
+    @apply text-xl md:text-2xl font-heading font-semibold text-mauve mb-4;
   }
   
   .container-section {
@@ -99,15 +99,15 @@
   }
   
   .btn-primary {
-    @apply bg-gold hover:bg-gold-dark text-noir font-semibold py-3 px-6 rounded-md transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2;
+    @apply bg-mauve hover:bg-mauve-dark text-white font-semibold py-3 px-6 rounded-md transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2;
   }
   
   .btn-secondary {
-    @apply bg-transparent hover:bg-noir-light text-gold border border-gold font-semibold py-3 px-6 rounded-md transition-all duration-300;
+    @apply bg-transparent hover:bg-noir-light text-mauve border border-mauve font-semibold py-3 px-6 rounded-md transition-all duration-300;
   }
 
   .card-service {
-    @apply bg-noir-light border border-gold/10 p-6 rounded-lg transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.15)] hover:border-gold/30;
+    @apply bg-noir-light border border-mauve/10 p-6 rounded-lg transition-all duration-300 hover:shadow-[0_0_15px_rgba(126,105,171,0.15)] hover:border-mauve/30;
   }
   
   .animation-delay-100 {
@@ -133,8 +133,8 @@
   background-position: center;
 }
 
-.gold-gradient-text {
-  background: linear-gradient(90deg, #F4D474, #D4AF37, #AA8C2C);
+.mauve-gradient-text {
+  background: linear-gradient(90deg, #9B87F5, #7E69AB, #6E59A5);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

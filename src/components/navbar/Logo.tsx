@@ -5,7 +5,7 @@ export const Logo: React.FC = () => {
   return (
     <a href="/" className="flex items-center">
       <img
-        src="/lovable-uploads/2517bdfe-2aa0-4b02-a9b8-39e6c839486d.png"
+        src="/lovable-uploads/e3d84279-748a-4dbd-aaab-744e78b20954.png"
         alt="Stephan CANGY Logo"
         className="h-12"
       />
