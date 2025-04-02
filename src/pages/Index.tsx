@@ -1,12 +1,29 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useEffect } from 'react';
+import Navbar from '@/components/Navbar';
+import Hero from '@/components/Hero';
+import Services from '@/components/Services';
+import Appointment from '@/components/Appointment';
+import Testimonials from '@/components/Testimonials';
+import ChatBot from '@/components/ChatBot';
+import Footer from '@/components/Footer';
 
 const Index = () => {
+  useEffect(() => {
+    document.title = 'Stephan CANGY | Entrepreneur & Infopreneur';
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="flex flex-col min-h-screen bg-noir text-white">
+      <Navbar />
+      <main className="flex-grow">
+        <Hero />
+        <Services />
+        <Appointment />
+        <Testimonials />
+        <ChatBot />
+      </main>
+      <Footer />
     </div>
   );
 };
