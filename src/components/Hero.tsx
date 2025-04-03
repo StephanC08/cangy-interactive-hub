@@ -40,11 +40,13 @@ const Hero: React.FC = () => {
           <div className="md:w-1/2 mt-10 md:mt-0 flex justify-center animate-fade-in animation-delay-300">
             <div className="relative sticky top-32">
               <div className="w-64 h-64 md:w-80 md:h-80 bg-mauve/10 rounded-full absolute -top-4 -left-4"></div>
-              <img
-                src="/lovable-uploads/a0bca79c-615a-4b2f-9c67-101f7f821c66.png"
-                alt="Stephan CANGY"
-                className="w-64 h-64 md:w-80 md:h-80 object-cover object-top rounded-full border-4 border-mauve/30 relative z-10"
-              />
+              <div className="sticky top-32 z-10">
+                <img
+                  src="/lovable-uploads/a0bca79c-615a-4b2f-9c67-101f7f821c66.png"
+                  alt="Stephan CANGY"
+                  className="w-64 h-64 md:w-80 md:h-80 object-cover object-top rounded-full border-4 border-mauve/30 relative"
+                />
+              </div>
               <div className="absolute -bottom-2 -right-2 bg-noir-light border border-mauve px-4 py-2 rounded-full z-20">
                 <span className="text-mauve font-medium">15+ ans d'expérience</span>
               </div>
