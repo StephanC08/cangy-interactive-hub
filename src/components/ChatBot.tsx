@@ -5,10 +5,10 @@ import { useToast } from '@/components/ui/use-toast';
 import ChatHeader from './chatbot/ChatHeader';
 import ChatMessages from './chatbot/ChatMessages';
 import ChatInput from './chatbot/ChatInput';
-import { Message } from './chatbot/types';
+import { Message, ChatBotProps } from './chatbot/types';
 import { initialMessages, getBotResponse } from './chatbot/chatBotUtils';
 
-const ChatBot: React.FC = () => {
+const ChatBot: React.FC<ChatBotProps> = ({ fullWidth = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState<Message[]>(initialMessages);

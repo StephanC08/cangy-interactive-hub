@@ -7,3 +7,12 @@ export type Message = {
 };
 
 export type PredefinedResponses = Record<string, string>;
+
+export interface ChatBotProps {
+  fullWidth?: boolean;
+}
+
+export interface ChatResponseData {
+  response: string;
+  redirect?: boolean;
+}
