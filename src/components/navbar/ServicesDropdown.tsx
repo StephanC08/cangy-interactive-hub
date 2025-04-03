@@ -17,7 +17,7 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({ scrollToSect
   return (
     <NavigationMenuItem>
       <NavigationMenuTrigger 
-        className="text-white hover:text-gold transition-colors bg-transparent hover:bg-transparent"
+        className="text-white hover:text-gold transition-colors bg-transparent hover:bg-transparent focus:bg-transparent focus:text-mauve"
       >
         Services
       </NavigationMenuTrigger>
@@ -27,12 +27,12 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({ scrollToSect
             <NavigationMenuLink asChild>
               <a
                 onClick={() => scrollToSection('services')}
-                className="flex flex-col h-full p-4 no-underline rounded-md outline-none hover:bg-noir-light focus:shadow-md cursor-pointer"
+                className="flex flex-col h-full p-4 no-underline rounded-md outline-none hover:bg-noir hover:text-mauve transition-colors focus:shadow-md cursor-pointer"
               >
                 <div className="text-mauve mb-2">
                   <Monitor className="h-5 w-5" />
                 </div>
-                <div className="text-white font-semibold mb-1">Développement Web</div>
+                <div className="text-white font-semibold mb-1 group-hover:text-mauve">Développement Web</div>
                 <p className="text-gray-300 text-sm">
                   Sites web professionnels et applications sur mesure
                 </p>
@@ -43,12 +43,12 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({ scrollToSect
             <NavigationMenuLink asChild>
               <a
                 onClick={() => scrollToSection('services')}
-                className="flex flex-col h-full p-4 no-underline rounded-md outline-none hover:bg-noir-light focus:shadow-md cursor-pointer"
+                className="flex flex-col h-full p-4 no-underline rounded-md outline-none hover:bg-noir hover:text-mauve transition-colors focus:shadow-md cursor-pointer"
               >
                 <div className="text-mauve mb-2">
                   <Users className="h-5 w-5" />
                 </div>
-                <div className="text-white font-semibold mb-1">Coaching & Accompagnement</div>
+                <div className="text-white font-semibold mb-1 group-hover:text-mauve">Coaching & Accompagnement</div>
                 <p className="text-gray-300 text-sm">
                   Stratégies et suivi personnalisé pour votre succès
                 </p>
@@ -59,12 +59,12 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({ scrollToSect
             <NavigationMenuLink asChild>
               <a
                 onClick={() => scrollToSection('services')}
-                className="flex flex-col h-full p-4 no-underline rounded-md outline-none hover:bg-noir-light focus:shadow-md cursor-pointer"
+                className="flex flex-col h-full p-4 no-underline rounded-md outline-none hover:bg-noir hover:text-mauve transition-colors focus:shadow-md cursor-pointer"
               >
                 <div className="text-mauve mb-2">
                   <Home className="h-5 w-5" />
                 </div>
-                <div className="text-white font-semibold mb-1">Conseil Immobilier</div>
+                <div className="text-white font-semibold mb-1 group-hover:text-mauve">Conseil Immobilier</div>
                 <p className="text-gray-300 text-sm">
                   Solutions adaptées pour vos projets immobiliers
                 </p>

@@ -1,8 +1,9 @@
 
 import React from "react";
-import { ChevronDown, Monitor, Users, Home } from "lucide-react";
+import { ChevronDown, Monitor, Users, Home, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -72,6 +73,26 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
         <Link to="/immobilier" className="text-white py-2 hover:text-mauve transition-colors">
           Immobilier
         </Link>
+        <Link to="/rendez-vous" className="text-white py-2 hover:text-mauve transition-colors flex items-center">
+          <Calendar size={16} className="text-mauve mr-2" />
+          Rendez-vous
+        </Link>
+
+        <SignedIn>
+          <Link to="/espace-membre" className="text-white py-2 hover:text-mauve transition-colors flex items-center">
+            Espace membre
+            <UserButton className="ml-2" />
+          </Link>
+        </SignedIn>
+        <SignedOut>
+          <Link to="/connexion" className="text-white py-2 hover:text-mauve transition-colors">
+            Connexion
+          </Link>
+          <Link to="/inscription" className="text-white py-2 hover:text-mauve transition-colors">
+            Inscription
+          </Link>
+        </SignedOut>
+
         <Button onClick={handleContactClick} className="btn-primary">
           Contact
         </Button>
