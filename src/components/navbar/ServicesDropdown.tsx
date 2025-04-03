@@ -17,12 +17,12 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({ scrollToSect
   return (
     <NavigationMenuItem>
       <NavigationMenuTrigger 
-        className="text-white hover:text-mauve transition-colors bg-transparent hover:bg-transparent"
+        className="text-white hover:text-gold transition-colors bg-transparent hover:bg-transparent"
       >
         Services
       </NavigationMenuTrigger>
       <NavigationMenuContent>
-        <ul className="grid gap-3 p-4 w-[350px] md:w-[500px] grid-cols-1 md:grid-cols-3">
+        <ul className="grid gap-3 p-4 w-[350px] md:w-[500px] grid-cols-1 md:grid-cols-3 bg-noir-light">
           <li className="row-span-1">
             <NavigationMenuLink asChild>
               <a
@@ -32,8 +32,8 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({ scrollToSect
                 <div className="text-mauve mb-2">
                   <Monitor className="h-5 w-5" />
                 </div>
-                <div className="text-white mb-1 font-medium">Développement Web</div>
-                <p className="text-sm text-gray-400">
+                <div className="text-white font-semibold mb-1">Développement Web</div>
+                <p className="text-gray-300 text-sm">
                   Sites web professionnels et applications sur mesure
                 </p>
               </a>
@@ -48,8 +48,8 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({ scrollToSect
                 <div className="text-mauve mb-2">
                   <Users className="h-5 w-5" />
                 </div>
-                <div className="text-white mb-1 font-medium">Coaching & Accompagnement</div>
-                <p className="text-sm text-gray-400">
+                <div className="text-white font-semibold mb-1">Coaching & Accompagnement</div>
+                <p className="text-gray-300 text-sm">
                   Stratégies et suivi personnalisé pour votre succès
                 </p>
               </a>
@@ -64,8 +64,8 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({ scrollToSect
                 <div className="text-mauve mb-2">
                   <Home className="h-5 w-5" />
                 </div>
-                <div className="text-white mb-1 font-medium">Conseil Immobilier</div>
-                <p className="text-sm text-gray-400">
+                <div className="text-white font-semibold mb-1">Conseil Immobilier</div>
+                <p className="text-gray-300 text-sm">
                   Solutions adaptées pour vos projets immobiliers
                 </p>
               </a>

@@ -2,6 +2,7 @@
 import React from "react";
 import { ChevronDown, Monitor, Users, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -47,13 +48,13 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
               <Users size={16} className="text-mauve mr-2" />
               <span className="text-white">Coaching & Accompagnement</span>
             </button>
-            <button
-              onClick={() => scrollToSection('services')}
+            <Link
+              to="/immobilier"
               className="text-white py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
             >
               <Home size={16} className="text-mauve mr-2" />
               <span className="text-white">Conseil Immobilier</span>
-            </button>
+            </Link>
           </div>
         </div>
         <button
@@ -68,6 +69,9 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
         >
           Témoignages
         </button>
+        <Link to="/immobilier" className="text-white py-2 hover:text-mauve transition-colors">
+          Immobilier
+        </Link>
         <Button onClick={handleContactClick} className="btn-primary">
           Contact
         </Button>

@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -35,6 +36,12 @@ export const DesktopMenu: React.FC<DesktopMenuProps> = ({
       >
         Témoignages
       </button>
+      <Link 
+        to="/immobilier"
+        className="text-white hover:text-gold transition-colors"
+      >
+        Immobilier
+      </Link>
       <Button onClick={handleContactClick} className="btn-primary">
         Contact
       </Button>
