@@ -35,21 +35,21 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
           <div id="servicesSubMenu" className="hidden pl-4 pt-2 space-y-3">
             <button
               onClick={() => scrollToSection('services')}
-              className="text-gray-300 py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
+              className="text-white py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
             >
               <Monitor size={16} className="text-mauve mr-2" />
               <span>Développement Web</span>
             </button>
             <button
               onClick={() => scrollToSection('services')}
-              className="text-gray-300 py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
+              className="text-white py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
             >
               <Users size={16} className="text-mauve mr-2" />
               <span>Coaching & Accompagnement</span>
             </button>
             <button
               onClick={() => scrollToSection('services')}
-              className="text-gray-300 py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
+              className="text-white py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
             >
               <Home size={16} className="text-mauve mr-2" />
               <span>Conseil Immobilier</span>
