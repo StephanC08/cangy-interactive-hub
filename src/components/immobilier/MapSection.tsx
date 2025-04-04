@@ -12,10 +12,11 @@ const MapSection = () => {
   const [errorLoading, setErrorLoading] = useState(false);
   
   useEffect(() => {
+    let isMounted = true;
+    
     // Define the callback for when Google Maps API loads
     const initMap = () => {
-      if (!mapRef.current) {
-        setErrorLoading(true);
+      if (!mapRef.current || !isMounted) {
         return;
       }
 
@@ -23,12 +24,14 @@ const MapSection = () => {
         initializeMap(
           mapRef.current, 
           priceData, 
-          () => setMapLoaded(true), 
-          () => setErrorLoading(true)
+          () => isMounted && setMapLoaded(true), 
+          () => isMounted && setErrorLoading(true)
         );
       } catch (error) {
         console.error("Error initializing map:", error);
-        setErrorLoading(true);
+        if (isMounted) {
+          setErrorLoading(true);
+        }
       }
     };
     
@@ -39,7 +42,7 @@ const MapSection = () => {
     loadGoogleMapsAPI(initMap);
 
     return () => {
-      // Clean up the global initMap reference
+      isMounted = false;
       if (window.initMap === initMap) {
         window.initMap = undefined;
       }

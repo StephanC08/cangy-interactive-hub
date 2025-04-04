@@ -12,7 +12,7 @@ export const initializeMap = (
   onMapLoad: () => void,
   onMapError: () => void
 ): void => {
-  if (!window.google) {
+  if (!window.google || !window.google.maps) {
     onMapError();
     return;
   }
@@ -106,9 +106,6 @@ export const loadGoogleMapsAPI = (callback: () => void): void => {
   script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDnuKqsyZjOtlMXm17b_hqOGhqbvheQM-8&callback=initMap`;
   script.async = true;
   script.defer = true;
-  
-  // Store the script element globally to avoid cleanup issues
-  scriptElement = script;
   
   // Set up the callback
   window.initMap = () => {
