@@ -1,10 +1,9 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { Map, MapPin, Info } from "lucide-react";
-import { initializeMap, loadGoogleMapsAPI } from './map/MapLoader';
+import { initializeMap, loadGoogleMapsAPI, cleanupGoogleMapsResources } from './map/MapLoader';
 import { priceData } from './map/PriceData';
 import { MapLoadingSpinner, MapError } from './map/MapLoading';
-import { PriceData } from './map/types';
 
 const MapSection = () => {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -35,6 +34,9 @@ const MapSection = () => {
       }
     };
     
+    // Store the function to check in cleanup
+    const currentInitMap = initMap;
+    
     // Set the global initMap function
     window.initMap = initMap;
     
@@ -43,10 +45,14 @@ const MapSection = () => {
 
     return () => {
       isMounted = false;
+      
       // Clean up the global initMap reference only if it still points to our function
-      if (window.initMap === initMap) {
+      if (window.initMap === currentInitMap) {
         window.initMap = undefined;
       }
+      
+      // Clean up Google Maps resources
+      cleanupGoogleMapsResources();
     };
   }, []);
 

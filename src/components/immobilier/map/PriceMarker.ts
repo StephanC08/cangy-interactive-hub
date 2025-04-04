@@ -6,6 +6,14 @@ export const addPriceMarkers = (
   map: any,
   priceData: PriceData[]
 ): void => {
+  if (!window.google || !window.google.maps) {
+    console.error("Google Maps API n'est pas disponible");
+    return;
+  }
+  
+  const markers: any[] = [];
+  const infoWindows: any[] = [];
+  
   priceData.forEach((data) => {
     const marker = new window.google.maps.Marker({
       position: { lat: data.lat, lng: data.lng },
@@ -20,6 +28,8 @@ export const addPriceMarkers = (
         scale: 8,
       },
     });
+    
+    markers.push(marker);
 
     // Ajouter une infowindow pour chaque marqueur
     const infoWindow = new window.google.maps.InfoWindow({
@@ -30,9 +40,16 @@ export const addPriceMarkers = (
         </div>
       `,
     });
+    
+    infoWindows.push(infoWindow);
 
     marker.addListener('click', () => {
+      // Fermer toutes les infowindows ouvertes
+      infoWindows.forEach(iw => iw.close());
+      // Ouvrir cette infowindow
       infoWindow.open(map, marker);
     });
   });
+  
+  return { markers, infoWindows };
 };

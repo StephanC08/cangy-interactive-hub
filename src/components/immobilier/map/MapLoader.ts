@@ -4,6 +4,7 @@ import { PriceData } from './types';
 
 // Track if the script is already being loaded
 let isScriptLoading = false;
+let mapInstance: any = null;
 
 export const initializeMap = (
   mapElement: HTMLDivElement,
@@ -18,6 +19,11 @@ export const initializeMap = (
 
   try {
     const thononPosition = { lat: 46.3705, lng: 6.4784 }; // Coordonnées de Thonon-les-Bains
+    
+    // Clean up any existing map instance
+    if (mapInstance) {
+      mapInstance = null;
+    }
     
     const map = new window.google.maps.Map(mapElement, {
       center: thononPosition,
@@ -58,6 +64,8 @@ export const initializeMap = (
         },
       ],
     });
+    
+    mapInstance = map;
 
     // Dessiner le cercle de 50km autour de Thonon
     const thononCircle = new window.google.maps.Circle({
@@ -102,22 +110,45 @@ export const loadGoogleMapsAPI = (callback: () => void): void => {
   // Set up the script
   isScriptLoading = true;
   const script = document.createElement('script');
-  script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDnuKqsyZjOtlMXm17b_hqOGhqbvheQM-8&callback=initMap`;
+  script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAEbCmQFd4_a8CfYmJkQO3twlxrMry1Vuw&callback=initMap`;
   script.async = true;
   script.defer = true;
+  
+  // Store reference to our callback function
+  const initMapCallback = callback;
   
   // Set up the callback
   window.initMap = () => {
     isScriptLoading = false;
-    callback();
+    initMapCallback();
   };
   
   // Add error handling
   script.onerror = () => {
     console.error("Google Maps script failed to load");
     isScriptLoading = false;
+    // Remove the script element to avoid potential memory leaks
+    script.remove();
   };
+  
+  // Cleanup function for component unmounting
+  script.setAttribute('data-map-script', 'true');
   
   // Actually add the script to the page
   document.head.appendChild(script);
+};
+
+// Function to cleanup Google Maps resources
+export const cleanupGoogleMapsResources = (): void => {
+  // Reset the map instance
+  mapInstance = null;
+  
+  // Clean up the script if needed
+  const mapScript = document.querySelector('script[data-map-script="true"]');
+  if (mapScript) {
+    mapScript.remove();
+  }
+  
+  // Reset the loading flag
+  isScriptLoading = false;
 };
