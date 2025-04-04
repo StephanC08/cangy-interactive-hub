@@ -10,6 +10,9 @@ const MapSection = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
   const [errorLoading, setErrorLoading] = useState(false);
+  
+  // Store the callback function in a ref to avoid recreating it on re-renders
+  const callbackRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     // Define the callback for when Google Maps API loads
@@ -19,22 +22,37 @@ const MapSection = () => {
         return;
       }
 
-      initializeMap(
-        mapRef.current, 
-        priceData, 
-        () => setMapLoaded(true), 
-        () => setErrorLoading(true)
-      );
+      // Only initialize the map if the component is still mounted
+      try {
+        initializeMap(
+          mapRef.current, 
+          priceData, 
+          () => setMapLoaded(true), 
+          () => setErrorLoading(true)
+        );
+      } catch (error) {
+        console.error("Error initializing map:", error);
+        setErrorLoading(true);
+      }
     };
 
+    // Store the callback for cleanup
+    callbackRef.current = initMap;
+    
+    // Set the global initMap function
+    window.initMap = initMap;
+    
     // Load Google Maps API
     loadGoogleMapsAPI(initMap);
 
     return () => {
-      // Nettoyer la fonction globale initMap
-      if (window.initMap) {
+      // Clean up the global initMap reference
+      if (window.initMap === initMap) {
         window.initMap = undefined;
       }
+      
+      // Reset the callback ref
+      callbackRef.current = null;
     };
   }, []);
 

@@ -2,6 +2,10 @@
 import { addPriceMarkers } from './PriceMarker';
 import { PriceData } from './types';
 
+// Track if the script is already being loaded
+let isScriptLoading = false;
+let scriptElement: HTMLScriptElement | null = null;
+
 export const initializeMap = (
   mapElement: HTMLDivElement,
   priceData: PriceData[],
@@ -79,14 +83,52 @@ export const initializeMap = (
 };
 
 export const loadGoogleMapsAPI = (callback: () => void): void => {
-  if (!window.google) {
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDnuKqsyZjOtlMXm17b_hqOGhqbvheQM-8&callback=initMap`;
-    script.async = true;
-    script.defer = true;
-    window.initMap = callback;
-    document.head.appendChild(script);
-  } else {
+  // If the API is already available, just use it
+  if (window.google) {
     callback();
+    return;
   }
+  
+  // If we're already loading the script, don't load it again
+  if (isScriptLoading) {
+    // Just register the callback to be called when script loads
+    const originalInitMap = window.initMap;
+    window.initMap = () => {
+      if (originalInitMap) originalInitMap();
+      callback();
+    };
+    return;
+  }
+  
+  // Clean up any previous script element that might exist
+  if (scriptElement) {
+    document.head.removeChild(scriptElement);
+    scriptElement = null;
+  }
+  
+  // Set up the script
+  isScriptLoading = true;
+  scriptElement = document.createElement('script');
+  scriptElement.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDnuKqsyZjOtlMXm17b_hqOGhqbvheQM-8&callback=initMap`;
+  scriptElement.async = true;
+  scriptElement.defer = true;
+  
+  // Set up the callback
+  window.initMap = () => {
+    isScriptLoading = false;
+    callback();
+  };
+  
+  // Add error handling
+  scriptElement.onerror = () => {
+    console.error("Google Maps script failed to load");
+    isScriptLoading = false;
+    if (scriptElement) {
+      document.head.removeChild(scriptElement);
+      scriptElement = null;
+    }
+  };
+  
+  // Actually add the script to the page
+  document.head.appendChild(scriptElement);
 };
