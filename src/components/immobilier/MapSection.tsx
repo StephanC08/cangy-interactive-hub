@@ -43,6 +43,7 @@ const MapSection = () => {
 
     return () => {
       isMounted = false;
+      // Clean up the global initMap reference only if it still points to our function
       if (window.initMap === initMap) {
         window.initMap = undefined;
       }

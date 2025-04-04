@@ -4,7 +4,6 @@ import { PriceData } from './types';
 
 // Track if the script is already being loaded
 let isScriptLoading = false;
-let scriptElement: HTMLScriptElement | null = null;
 
 export const initializeMap = (
   mapElement: HTMLDivElement,

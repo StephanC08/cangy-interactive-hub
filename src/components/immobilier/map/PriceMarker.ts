@@ -3,7 +3,7 @@ import { PriceData } from './types';
 
 // Function to add markers with price information to the map
 export const addPriceMarkers = (
-  map: google.maps.Map,
+  map: any,
   priceData: PriceData[]
 ): void => {
   priceData.forEach((data) => {
