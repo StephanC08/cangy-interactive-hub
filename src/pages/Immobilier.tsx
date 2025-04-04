@@ -7,6 +7,7 @@ import HeroSection from '@/components/immobilier/HeroSection';
 import PropertySimulator from '@/components/immobilier/PropertySimulator';
 import PropertyListings from '@/components/immobilier/PropertyListings';
 import MapSection from '@/components/immobilier/MapSection';
+import LoanCalculator from '@/components/immobilier/LoanCalculator';
 import { Property } from '@/components/immobilier/PropertyCard';
 
 const Immobilier = () => {
@@ -51,6 +52,7 @@ const Immobilier = () => {
       <main className="flex-grow">
         <HeroSection />
         <PropertySimulator />
+        <LoanCalculator />
         <PropertyListings properties={properties} />
         <MapSection />
         <ChatBot />
