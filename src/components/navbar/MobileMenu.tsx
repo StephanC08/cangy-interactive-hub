@@ -81,7 +81,13 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
         <SignedIn>
           <Link to="/espace-membre" className="text-white py-2 hover:text-mauve transition-colors flex items-center">
             Espace membre
-            <UserButton className="ml-2" />
+            <UserButton 
+              appearance={{
+                elements: {
+                  userButtonAvatarBox: 'border-2 border-mauve ml-2'
+                }
+              }}
+            />
           </Link>
         </SignedIn>
         <SignedOut>
