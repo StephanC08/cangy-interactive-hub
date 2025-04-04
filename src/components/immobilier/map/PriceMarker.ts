@@ -7,12 +7,12 @@ export const addPriceMarkers = (
   priceData: PriceData[]
 ): void => {
   priceData.forEach((data) => {
-    const marker = new google.maps.Marker({
+    const marker = new window.google.maps.Marker({
       position: { lat: data.lat, lng: data.lng },
       map,
       title: data.location,
       icon: {
-        path: google.maps.SymbolPath.CIRCLE,
+        path: window.google.maps.SymbolPath.CIRCLE,
         fillColor: '#9b87f5',
         fillOpacity: 0.9,
         strokeWeight: 1,
@@ -22,7 +22,7 @@ export const addPriceMarkers = (
     });
 
     // Ajouter une infowindow pour chaque marqueur
-    const infoWindow = new google.maps.InfoWindow({
+    const infoWindow = new window.google.maps.InfoWindow({
       content: `
         <div style="padding: 10px;">
           <h3 style="margin: 0 0 5px; font-weight: bold;">${data.location}</h3>

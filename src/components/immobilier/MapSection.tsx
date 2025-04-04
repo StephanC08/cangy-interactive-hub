@@ -11,9 +11,6 @@ const MapSection = () => {
   const [mapLoaded, setMapLoaded] = useState(false);
   const [errorLoading, setErrorLoading] = useState(false);
   
-  // Store the callback function in a ref to avoid recreating it on re-renders
-  const callbackRef = useRef<(() => void) | null>(null);
-
   useEffect(() => {
     // Define the callback for when Google Maps API loads
     const initMap = () => {
@@ -22,7 +19,6 @@ const MapSection = () => {
         return;
       }
 
-      // Only initialize the map if the component is still mounted
       try {
         initializeMap(
           mapRef.current, 
@@ -35,9 +31,6 @@ const MapSection = () => {
         setErrorLoading(true);
       }
     };
-
-    // Store the callback for cleanup
-    callbackRef.current = initMap;
     
     // Set the global initMap function
     window.initMap = initMap;
@@ -50,9 +43,6 @@ const MapSection = () => {
       if (window.initMap === initMap) {
         window.initMap = undefined;
       }
-      
-      // Reset the callback ref
-      callbackRef.current = null;
     };
   }, []);
 

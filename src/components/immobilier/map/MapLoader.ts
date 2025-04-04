@@ -84,7 +84,7 @@ export const initializeMap = (
 
 export const loadGoogleMapsAPI = (callback: () => void): void => {
   // If the API is already available, just use it
-  if (window.google) {
+  if (window.google && window.google.maps) {
     callback();
     return;
   }
@@ -100,18 +100,15 @@ export const loadGoogleMapsAPI = (callback: () => void): void => {
     return;
   }
   
-  // Clean up any previous script element that might exist
-  if (scriptElement) {
-    document.head.removeChild(scriptElement);
-    scriptElement = null;
-  }
-  
   // Set up the script
   isScriptLoading = true;
-  scriptElement = document.createElement('script');
-  scriptElement.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDnuKqsyZjOtlMXm17b_hqOGhqbvheQM-8&callback=initMap`;
-  scriptElement.async = true;
-  scriptElement.defer = true;
+  const script = document.createElement('script');
+  script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDnuKqsyZjOtlMXm17b_hqOGhqbvheQM-8&callback=initMap`;
+  script.async = true;
+  script.defer = true;
+  
+  // Store the script element globally to avoid cleanup issues
+  scriptElement = script;
   
   // Set up the callback
   window.initMap = () => {
@@ -120,15 +117,11 @@ export const loadGoogleMapsAPI = (callback: () => void): void => {
   };
   
   // Add error handling
-  scriptElement.onerror = () => {
+  script.onerror = () => {
     console.error("Google Maps script failed to load");
     isScriptLoading = false;
-    if (scriptElement) {
-      document.head.removeChild(scriptElement);
-      scriptElement = null;
-    }
   };
   
   // Actually add the script to the page
-  document.head.appendChild(scriptElement);
+  document.head.appendChild(script);
 };
