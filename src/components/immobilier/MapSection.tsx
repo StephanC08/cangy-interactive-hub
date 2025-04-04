@@ -130,7 +130,7 @@ const MapSection = () => {
     const loadGoogleMapsAPI = () => {
       if (!window.google) {
         const script = document.createElement('script');
-        script.src = `https://maps.googleapis.com/maps/api/js?key=VOTRE_CLE_API_GOOGLE_MAPS&callback=initMap`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDnuKqsyZjOtlMXm17b_hqOGhqbvheQM-8&callback=initMap`;
         script.async = true;
         script.defer = true;
         window.initMap = initMap;
@@ -215,3 +215,4 @@ declare global {
 }
 
 export default MapSection;
+
