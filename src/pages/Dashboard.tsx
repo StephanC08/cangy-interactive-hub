@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { FileText, Video, Wrench, Download, PlayCircle, Eye } from "lucide-react";
+import { FileText, Video, Wrench, Download, PlayCircle, Eye, FileType, Book } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -91,6 +91,33 @@ const Dashboard = () => {
       size: "3.5 MB", 
       category: "Outil",
       description: "Créez facilement des personas détaillés pour votre stratégie de marketing digital."
+    },
+    { 
+      id: 7, 
+      name: "Guide PDF de puissance", 
+      type: "document", 
+      icon: <Book />, 
+      size: "5.2 MB", 
+      category: "PDF",
+      description: "Un guide exclusif pour développer votre influence et votre leadership professionnel."
+    },
+    { 
+      id: 8, 
+      name: "Vidéo exclusive sur l'immobilier stratégique", 
+      type: "video", 
+      icon: <Video />, 
+      size: "78 MB", 
+      category: "Vidéo",
+      description: "Découvrez les stratégies d'investissement immobilier pour maximiser vos rendements."
+    },
+    { 
+      id: 9, 
+      name: "Modèle de pitch client en .docx", 
+      type: "document", 
+      icon: <FileType />, 
+      size: "1.8 MB", 
+      category: "DOCX",
+      description: "Un modèle professionnel de présentation pour convaincre vos prospects et clients."
     },
   ];
 
@@ -288,3 +315,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
