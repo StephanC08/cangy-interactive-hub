@@ -3,16 +3,17 @@ import React, { useState, useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { FileText, Video, Wrench, Download, PlayCircle, Eye, FileType, Book } from "lucide-react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Skeleton } from "@/components/ui/skeleton";
+import DashboardSkeleton from '@/components/dashboard/DashboardSkeleton';
+import StatsCards from '@/components/dashboard/StatsCards';
+import PerformanceCard from '@/components/dashboard/PerformanceCard';
+import ResourcesGrid from '@/components/dashboard/ResourcesGrid';
+import { performanceData, getResources, containerVariants, itemVariants } from '@/data/dashboardData';
 
 const Dashboard = () => {
   const { user } = useUser();
   const [loading, setLoading] = useState(true);
+  const [resources, setResources] = useState(getResources());
 
   useEffect(() => {
     // Simuler un temps de chargement pour l'animation
@@ -25,149 +26,12 @@ const Dashboard = () => {
 
   if (!user) return null;
 
-  // Données pour le tableau de bord
-  const performanceData = [
-    { name: 'Jan', visits: 400, conversions: 240 },
-    { name: 'Fév', visits: 300, conversions: 139 },
-    { name: 'Mar', visits: 200, conversions: 980 },
-    { name: 'Avr', visits: 278, conversions: 390 },
-    { name: 'Mai', visits: 189, conversions: 480 },
-    { name: 'Juin', visits: 239, conversions: 380 },
-    { name: 'Juil', visits: 349, conversions: 430 },
-  ];
-
-  // Ressources exclusives
-  const resources = [
-    { 
-      id: 1, 
-      name: "Guide de référencement SEO", 
-      type: "document", 
-      icon: <FileText />, 
-      size: "2.4 MB", 
-      category: "PDF",
-      description: "Un guide complet pour optimiser votre référencement naturel et améliorer votre visibilité."
-    },
-    { 
-      id: 2, 
-      name: "Tutoriel UX Design", 
-      type: "video", 
-      icon: <Video />, 
-      size: "45 MB", 
-      category: "Vidéo",
-      description: "Découvrez les principes fondamentaux du design UX pour créer des interfaces intuitives."
-    },
-    { 
-      id: 3, 
-      name: "Plugin WordPress Premium", 
-      type: "tool", 
-      icon: <Wrench />, 
-      size: "1.8 MB", 
-      category: "Outil",
-      description: "Un plugin exclusif pour améliorer les performances et le SEO de votre site WordPress."
-    },
-    { 
-      id: 4, 
-      name: "Checklist Audit Digital", 
-      type: "document", 
-      icon: <FileText />, 
-      size: "1.2 MB", 
-      category: "PDF",
-      description: "Une checklist complète pour réaliser un audit de votre présence digitale."
-    },
-    { 
-      id: 5, 
-      name: "Formation Analytics", 
-      type: "video", 
-      icon: <Video />, 
-      size: "60 MB", 
-      category: "Vidéo",
-      description: "Apprenez à utiliser Google Analytics pour analyser et optimiser votre trafic web."
-    },
-    { 
-      id: 6, 
-      name: "Générateur de Persona", 
-      type: "tool", 
-      icon: <Wrench />, 
-      size: "3.5 MB", 
-      category: "Outil",
-      description: "Créez facilement des personas détaillés pour votre stratégie de marketing digital."
-    },
-    { 
-      id: 7, 
-      name: "Guide PDF de puissance", 
-      type: "document", 
-      icon: <Book />, 
-      size: "5.2 MB", 
-      category: "PDF",
-      description: "Un guide exclusif pour développer votre influence et votre leadership professionnel."
-    },
-    { 
-      id: 8, 
-      name: "Vidéo exclusive sur l'immobilier stratégique", 
-      type: "video", 
-      icon: <Video />, 
-      size: "78 MB", 
-      category: "Vidéo",
-      description: "Découvrez les stratégies d'investissement immobilier pour maximiser vos rendements."
-    },
-    { 
-      id: 9, 
-      name: "Modèle de pitch client en .docx", 
-      type: "document", 
-      icon: <FileType />, 
-      size: "1.8 MB", 
-      category: "DOCX",
-      description: "Un modèle professionnel de présentation pour convaincre vos prospects et clients."
-    },
-  ];
-
-  // Variantes d'animation avec framer-motion
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { type: "spring", stiffness: 100 }
-    }
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-noir">
       <Navbar />
       <div className="container mx-auto px-6 py-24 flex-grow">
         {loading ? (
-          <div className="space-y-6">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 space-y-4 md:space-y-0">
-              <div>
-                <Skeleton className="h-10 w-64 bg-noir-light mb-2" />
-                <Skeleton className="h-5 w-48 bg-noir-light" />
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              {[1, 2, 3].map((i) => (
-                <Skeleton key={i} className="h-40 bg-noir-light" />
-              ))}
-            </div>
-            
-            <Skeleton className="h-80 w-full bg-noir-light mb-8" />
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <Skeleton key={i} className="h-56 bg-noir-light" />
-              ))}
-            </div>
-          </div>
+          <DashboardSkeleton />
         ) : (
           <motion.div
             initial="hidden"
@@ -183,129 +47,13 @@ const Dashboard = () => {
               </div>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <Card className="bg-noir-light border-mauve/20">
-                <CardHeader>
-                  <CardTitle className="text-white">Visites</CardTitle>
-                  <CardDescription>Total ce mois</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-3xl font-bold text-white">1,245</div>
-                  <p className="text-sm text-green-500">↑ 14% depuis le mois dernier</p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-noir-light border-mauve/20">
-                <CardHeader>
-                  <CardTitle className="text-white">Conversions</CardTitle>
-                  <CardDescription>Total ce mois</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-3xl font-bold text-white">325</div>
-                  <p className="text-sm text-green-500">↑ 5% depuis le mois dernier</p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-noir-light border-mauve/20">
-                <CardHeader>
-                  <CardTitle className="text-white">Taux de conversion</CardTitle>
-                  <CardDescription>Moyenne mensuelle</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-3xl font-bold text-white">26%</div>
-                  <p className="text-sm text-red-500">↓ 2% depuis le mois dernier</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <Card className="bg-noir-light border-mauve/20 mb-8">
-                <CardHeader>
-                  <CardTitle className="text-white">Performance</CardTitle>
-                  <CardDescription>Analyse sur 7 mois</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="h-80">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={performanceData}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-                        <XAxis dataKey="name" stroke="#ccc" />
-                        <YAxis stroke="#ccc" />
-                        <Tooltip 
-                          contentStyle={{ backgroundColor: '#1a1a1a', borderColor: '#9b87f5', color: '#fff' }} 
-                        />
-                        <Legend />
-                        <Line type="monotone" dataKey="visits" stroke="#9b87f5" activeDot={{ r: 8 }} />
-                        <Line type="monotone" dataKey="conversions" stroke="#82ca9d" />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Button className="bg-mauve hover:bg-mauve-dark text-white">
-                    Télécharger le rapport
-                  </Button>
-                </CardFooter>
-              </Card>
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <h2 className="text-2xl font-bold text-white mb-6">Ressources exclusives</h2>
-              <motion.div 
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                variants={containerVariants}
-              >
-                {resources.map((resource) => (
-                  <motion.div key={resource.id} variants={itemVariants}>
-                    <Card className="bg-noir-light border-mauve/20 hover:border-mauve/50 transition-all duration-300 rounded-xl overflow-hidden shadow-lg shadow-mauve/5">
-                      <CardHeader className="bg-gradient-to-r from-noir to-noir-light border-b border-mauve/10">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-mauve/10 text-mauve mb-2">
-                              {resource.category}
-                            </span>
-                            <CardTitle className="text-white">{resource.name}</CardTitle>
-                            <CardDescription className="text-gray-400">{resource.size}</CardDescription>
-                          </div>
-                          <div className="text-mauve h-12 w-12 flex items-center justify-center rounded-full bg-mauve/10 p-3">
-                            {resource.icon}
-                          </div>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="pt-4">
-                        <p className="text-gray-400 text-sm mb-2">
-                          {resource.description}
-                        </p>
-                        <div className="h-1 w-full bg-noir-dark rounded-full overflow-hidden">
-                          <div className="h-1 bg-mauve/50 rounded-full w-3/4"></div>
-                        </div>
-                        <p className="text-xs text-gray-500 mt-1">Accès membre premium</p>
-                      </CardContent>
-                      <CardFooter className="border-t border-mauve/10">
-                        {resource.type === "document" && (
-                          <Button variant="outline" className="w-full border-mauve text-mauve hover:bg-mauve hover:text-white group">
-                            <Download className="mr-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
-                            Télécharger
-                          </Button>
-                        )}
-                        {resource.type === "video" && (
-                          <Button variant="outline" className="w-full border-mauve text-mauve hover:bg-mauve hover:text-white group">
-                            <PlayCircle className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
-                            Voir la vidéo
-                          </Button>
-                        )}
-                        {resource.type === "tool" && (
-                          <Button variant="outline" className="w-full border-mauve text-mauve hover:bg-mauve hover:text-white group">
-                            <Eye className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
-                            Accéder à l'outil
-                          </Button>
-                        )}
-                      </CardFooter>
-                    </Card>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
+            <StatsCards variants={itemVariants} />
+            <PerformanceCard performanceData={performanceData} variants={itemVariants} />
+            <ResourcesGrid 
+              resources={resources} 
+              containerVariants={containerVariants} 
+              itemVariants={itemVariants} 
+            />
           </motion.div>
         )}
       </div>
@@ -315,4 +63,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
