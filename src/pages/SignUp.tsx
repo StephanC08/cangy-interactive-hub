@@ -20,10 +20,10 @@ export default function SignUp() {
           </div>
           <div className="mt-8">
             <ClerkSignUp 
-              path="/inscription"
               routing="path"
-              signInUrl="/connexion"
-              redirectUrl="/espace-membre"
+              path="/sign-up"
+              signInUrl="/sign-in"
+              redirectUrl="/dashboard"
               appearance={{
                 elements: {
                   formButtonPrimary: 'bg-mauve hover:bg-mauve-dark text-white',

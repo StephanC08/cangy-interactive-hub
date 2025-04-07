@@ -1,7 +1,6 @@
 
 import React from 'react';
-import { useAuth, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react';
-import { useNavigate } from 'react-router-dom';
+import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;

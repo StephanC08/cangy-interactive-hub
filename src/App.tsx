@@ -11,6 +11,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import MemberArea from "./pages/MemberArea";
 import AppointmentPage from "./pages/Appointment";
+import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -33,7 +34,14 @@ const App = () => (
             <Route path="/immobilier" element={<Immobilier />} />
             <Route path="/connexion" element={<SignIn />} />
             <Route path="/inscription" element={<SignUp />} />
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/sign-up" element={<SignUp />} />
             <Route path="/rendez-vous" element={<AppointmentPage />} />
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } />
             <Route path="/espace-membre" element={
               <ProtectedRoute>
                 <MemberArea />
