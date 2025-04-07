@@ -5,10 +5,10 @@ import { PriceData } from './types';
 export const addPriceMarkers = (
   map: any,
   priceData: PriceData[]
-): void => {
+): { markers: any[]; infoWindows: any[]; } => {
   if (!window.google || !window.google.maps) {
     console.error("Google Maps API n'est pas disponible");
-    return;
+    return { markers: [], infoWindows: [] };
   }
   
   const markers: any[] = [];

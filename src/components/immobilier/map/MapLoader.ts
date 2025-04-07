@@ -5,6 +5,8 @@ import { PriceData } from './types';
 // Track if the script is already being loaded
 let isScriptLoading = false;
 let mapInstance: any = null;
+let markersCollection: any[] = [];
+let infoWindowsCollection: any[] = [];
 
 export const initializeMap = (
   mapElement: HTMLDivElement,
@@ -80,7 +82,9 @@ export const initializeMap = (
     });
 
     // Add markers with price information
-    addPriceMarkers(map, priceData);
+    const { markers, infoWindows } = addPriceMarkers(map, priceData);
+    markersCollection = markers;
+    infoWindowsCollection = infoWindows;
 
     onMapLoad();
   } catch (error) {
@@ -128,7 +132,9 @@ export const loadGoogleMapsAPI = (callback: () => void): void => {
     console.error("Google Maps script failed to load");
     isScriptLoading = false;
     // Remove the script element to avoid potential memory leaks
-    script.remove();
+    if (script.parentNode) {
+      script.parentNode.removeChild(script);
+    }
   };
   
   // Cleanup function for component unmounting
@@ -140,13 +146,29 @@ export const loadGoogleMapsAPI = (callback: () => void): void => {
 
 // Function to cleanup Google Maps resources
 export const cleanupGoogleMapsResources = (): void => {
+  // Cleanup all markers
+  if (markersCollection && markersCollection.length) {
+    markersCollection.forEach(marker => {
+      if (marker) marker.setMap(null);
+    });
+    markersCollection = [];
+  }
+  
+  // Cleanup all infoWindows
+  if (infoWindowsCollection && infoWindowsCollection.length) {
+    infoWindowsCollection.forEach(infoWindow => {
+      if (infoWindow) infoWindow.close();
+    });
+    infoWindowsCollection = [];
+  }
+  
   // Reset the map instance
   mapInstance = null;
   
   // Clean up the script if needed
   const mapScript = document.querySelector('script[data-map-script="true"]');
-  if (mapScript) {
-    mapScript.remove();
+  if (mapScript && mapScript.parentNode) {
+    mapScript.parentNode.removeChild(mapScript);
   }
   
   // Reset the loading flag

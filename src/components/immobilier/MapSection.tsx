@@ -23,8 +23,12 @@ const MapSection = () => {
         initializeMap(
           mapRef.current, 
           priceData, 
-          () => isMounted && setMapLoaded(true), 
-          () => isMounted && setErrorLoading(true)
+          () => {
+            if (isMounted) setMapLoaded(true);
+          }, 
+          () => {
+            if (isMounted) setErrorLoading(true);
+          }
         );
       } catch (error) {
         console.error("Error initializing map:", error);
