@@ -1,109 +1,10 @@
 
-import { Resource } from '@/components/dashboard/ResourceCard';
-import { FileText, Video, Wrench, Book, FileType } from "lucide-react";
-import React from 'react';
+import { PlayCircle, FileText, Tool } from "lucide-react";
+import React from "react";
 
-// Performance data for the dashboard
-export const performanceData = [
-  { name: 'Jan', visits: 400, conversions: 240 },
-  { name: 'Fév', visits: 300, conversions: 139 },
-  { name: 'Mar', visits: 200, conversions: 980 },
-  { name: 'Avr', visits: 278, conversions: 390 },
-  { name: 'Mai', visits: 189, conversions: 480 },
-  { name: 'Juin', visits: 239, conversions: 380 },
-  { name: 'Juil', visits: 349, conversions: 430 },
-];
-
-// Resources data
-export const getResources = (): Resource[] => [
-  { 
-    id: 1, 
-    name: "Guide de référencement SEO", 
-    type: "document", 
-    icon: React.createElement(FileText), 
-    size: "2.4 MB", 
-    category: "PDF",
-    description: "Un guide complet pour optimiser votre référencement naturel et améliorer votre visibilité."
-  },
-  { 
-    id: 2, 
-    name: "Tutoriel UX Design", 
-    type: "video", 
-    icon: React.createElement(Video), 
-    size: "45 MB", 
-    category: "Vidéo",
-    description: "Découvrez les principes fondamentaux du design UX pour créer des interfaces intuitives."
-  },
-  { 
-    id: 3, 
-    name: "Plugin WordPress Premium", 
-    type: "tool", 
-    icon: React.createElement(Wrench), 
-    size: "1.8 MB", 
-    category: "Outil",
-    description: "Un plugin exclusif pour améliorer les performances et le SEO de votre site WordPress."
-  },
-  { 
-    id: 4, 
-    name: "Checklist Audit Digital", 
-    type: "document", 
-    icon: React.createElement(FileText), 
-    size: "1.2 MB", 
-    category: "PDF",
-    description: "Une checklist complète pour réaliser un audit de votre présence digitale."
-  },
-  { 
-    id: 5, 
-    name: "Formation Analytics", 
-    type: "video", 
-    icon: React.createElement(Video), 
-    size: "60 MB", 
-    category: "Vidéo",
-    description: "Apprenez à utiliser Google Analytics pour analyser et optimiser votre trafic web."
-  },
-  { 
-    id: 6, 
-    name: "Générateur de Persona", 
-    type: "tool", 
-    icon: React.createElement(Wrench), 
-    size: "3.5 MB", 
-    category: "Outil",
-    description: "Créez facilement des personas détaillés pour votre stratégie de marketing digital."
-  },
-  { 
-    id: 7, 
-    name: "Guide PDF de puissance", 
-    type: "document", 
-    icon: React.createElement(Book), 
-    size: "5.2 MB", 
-    category: "PDF",
-    description: "Un guide exclusif pour développer votre influence et votre leadership professionnel."
-  },
-  { 
-    id: 8, 
-    name: "Vidéo exclusive sur l'immobilier stratégique", 
-    type: "video", 
-    icon: React.createElement(Video), 
-    size: "78 MB", 
-    category: "Vidéo",
-    description: "Découvrez les stratégies d'investissement immobilier pour maximiser vos rendements."
-  },
-  { 
-    id: 9, 
-    name: "Modèle de pitch client en .docx", 
-    type: "document", 
-    icon: React.createElement(FileType), 
-    size: "1.8 MB", 
-    category: "DOCX",
-    description: "Un modèle professionnel de présentation pour convaincre vos prospects et clients."
-  },
-];
-
-// Animation variants
 export const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: {},
   visible: {
-    opacity: 1,
     transition: {
       staggerChildren: 0.1
     }
@@ -111,10 +12,118 @@ export const containerVariants = {
 };
 
 export const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
-    y: 0,
     opacity: 1,
-    transition: { type: "spring", stiffness: 100 }
+    y: 0,
+    transition: { duration: 0.3 }
   }
 };
+
+export const performanceData = [
+  { name: 'Jan', value: 400 },
+  { name: 'Fev', value: 300 },
+  { name: 'Mar', value: 500 },
+  { name: 'Avr', value: 470 },
+  { name: 'Mai', value: 640 },
+  { name: 'Juin', value: 580 },
+  { name: 'Juil', value: 620 },
+  { name: 'Août', value: 750 },
+  { name: 'Sept', value: 800 },
+  { name: 'Oct', value: 750 },
+  { name: 'Nov', value: 820 },
+  { name: 'Déc', value: 900 },
+];
+
+export const getResources = () => [
+  {
+    id: 1,
+    name: "Guide du débutant",
+    type: "document",
+    icon: <FileText />,
+    size: "2.4 MB",
+    category: "Guide",
+    description: "Un guide complet pour démarrer avec nos services de base.",
+    requiredSubscription: "freemium"
+  },
+  {
+    id: 2,
+    name: "Tutoriel d'introduction",
+    type: "video",
+    icon: <PlayCircle />,
+    size: "15 min",
+    category: "Tutoriel",
+    description: "Vidéo d'introduction pour les nouveaux utilisateurs.",
+    requiredSubscription: "freemium"
+  },
+  {
+    id: 3,
+    name: "Calculatrice de ROI",
+    type: "tool",
+    icon: <Tool />,
+    size: "Web App",
+    category: "Outil",
+    description: "Calculez votre retour sur investissement avec cet outil simple.",
+    requiredSubscription: "freemium"
+  },
+  {
+    id: 4,
+    name: "Stratégies avancées",
+    type: "document",
+    icon: <FileText />,
+    size: "5.8 MB",
+    category: "Guide",
+    description: "Des stratégies avancées pour optimiser vos performances.",
+    requiredSubscription: "premium"
+  },
+  {
+    id: 5,
+    name: "Webinaire mensuel",
+    type: "video",
+    icon: <PlayCircle />,
+    size: "45 min",
+    category: "Formation",
+    description: "Notre dernier webinaire sur les tendances actuelles.",
+    requiredSubscription: "premium"
+  },
+  {
+    id: 6,
+    name: "Analyses personnalisées",
+    type: "tool",
+    icon: <Tool />,
+    size: "Web App",
+    category: "Outil",
+    description: "Obtenez des analyses personnalisées basées sur vos données.",
+    requiredSubscription: "premium"
+  },
+  {
+    id: 7,
+    name: "Étude de cas exclusive",
+    type: "document",
+    icon: <FileText />,
+    size: "8.2 MB",
+    category: "Exclusif",
+    description: "Étude de cas détaillée d'un client VIP ayant triplé son ROI.",
+    requiredSubscription: "vip"
+  },
+  {
+    id: 8,
+    name: "Session de conseil enregistrée",
+    type: "video",
+    icon: <PlayCircle />,
+    size: "60 min",
+    category: "Exclusif",
+    description: "Session de conseil exclusive avec notre expert principal.",
+    requiredSubscription: "vip"
+  },
+  {
+    id: 9,
+    name: "Simulateur de scénarios",
+    type: "tool",
+    icon: <Tool />,
+    size: "Web App",
+    category: "Outil VIP",
+    description: "Simulateur avancé pour tester différents scénarios d'investissement.",
+    requiredSubscription: "vip"
+  },
+];

@@ -6,14 +6,21 @@ import { LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import ResourceCard, { Resource } from './ResourceCard';
+import { SubscriptionTier } from '@/pages/Dashboard';
 
 interface ResourcesGridProps {
   resources: Resource[];
   containerVariants: any;
   itemVariants: any;
+  userSubscriptionTier: SubscriptionTier;
 }
 
-const ResourcesGrid: React.FC<ResourcesGridProps> = ({ resources, containerVariants, itemVariants }) => {
+const ResourcesGrid: React.FC<ResourcesGridProps> = ({ 
+  resources, 
+  containerVariants, 
+  itemVariants,
+  userSubscriptionTier
+}) => {
   const { signOut } = useClerk();
   const { toast } = useToast();
 
@@ -33,10 +40,42 @@ const ResourcesGrid: React.FC<ResourcesGridProps> = ({ resources, containerVaria
     }
   };
 
+  const handleUpgradeClick = () => {
+    toast({
+      title: "Mise à niveau d'abonnement",
+      description: "La fonctionnalité de mise à niveau sera bientôt disponible.",
+    });
+  };
+
+  const getResourcesCount = () => {
+    switch(userSubscriptionTier) {
+      case 'vip':
+        return resources.filter(r => r.requiredSubscription === 'vip').length;
+      case 'premium':
+        return resources.filter(r => r.requiredSubscription === 'premium').length;
+      default:
+        return resources.length;
+    }
+  };
+
   return (
     <motion.div variants={itemVariants} className="space-y-8">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-white mb-6">Ressources exclusives</h2>
+        <div>
+          <h2 className="text-2xl font-bold text-white mb-2">Ressources exclusives</h2>
+          <p className="text-gray-400 text-sm">
+            Vous avez accès à {resources.length} ressources avec votre abonnement {userSubscriptionTier}.
+            {userSubscriptionTier !== 'vip' && (
+              <span> <Button 
+                variant="link" 
+                className="p-0 h-auto text-mauve hover:text-mauve/80"
+                onClick={handleUpgradeClick}
+              >
+                Passez à l'offre supérieure
+              </Button> pour débloquer plus de contenu.</span>
+            )}
+          </p>
+        </div>
         <Button 
           onClick={handleSignOut} 
           variant="outline" 
@@ -57,6 +96,7 @@ const ResourcesGrid: React.FC<ResourcesGridProps> = ({ resources, containerVaria
             key={resource.id} 
             resource={resource}
             variants={itemVariants}
+            userSubscriptionTier={userSubscriptionTier}
           />
         ))}
       </motion.div>
