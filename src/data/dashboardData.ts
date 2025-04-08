@@ -1,5 +1,4 @@
-
-import { PlayCircle, FileText, Tool } from "lucide-react";
+import { PlayCircle, FileText, Wrench } from "lucide-react";
 import React from "react";
 
 export const containerVariants = {
@@ -35,7 +34,6 @@ export const performanceData = [
   { name: 'Déc', value: 900 },
 ];
 
-// Define resource icons as string identifiers instead of JSX
 export const getResources = () => [
   {
     id: 1,
@@ -61,7 +59,7 @@ export const getResources = () => [
     id: 3,
     name: "Calculatrice de ROI",
     type: "tool",
-    iconName: "Tool",
+    iconName: "Wrench",
     size: "Web App",
     category: "Outil",
     description: "Calculez votre retour sur investissement avec cet outil simple.",
@@ -91,7 +89,7 @@ export const getResources = () => [
     id: 6,
     name: "Analyses personnalisées",
     type: "tool",
-    iconName: "Tool",
+    iconName: "Wrench",
     size: "Web App",
     category: "Outil",
     description: "Obtenez des analyses personnalisées basées sur vos données.",
@@ -121,7 +119,7 @@ export const getResources = () => [
     id: 9,
     name: "Simulateur de scénarios",
     type: "tool",
-    iconName: "Tool",
+    iconName: "Wrench",
     size: "Web App",
     category: "Outil VIP",
     description: "Simulateur avancé pour tester différents scénarios d'investissement.",

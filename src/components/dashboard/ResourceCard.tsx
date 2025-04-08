@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, PlayCircle, Eye, Lock, Star, Crown, FileText, Tool } from "lucide-react";
+import { Download, PlayCircle, Eye, Lock, Star, Crown, FileText, Wrench } from "lucide-react";
 import { motion } from "framer-motion";
 import { SubscriptionTier } from '@/pages/Dashboard';
 import { useToast } from "@/components/ui/use-toast";
@@ -11,7 +10,7 @@ export interface Resource {
   id: number;
   name: string;
   type: "document" | "video" | "tool";
-  iconName: string; // Changed from icon: React.ReactNode
+  iconName: string;
   size: string;
   category: string;
   description: string;
@@ -34,21 +33,19 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, variants, userSub
     });
   };
   
-  // Function to render the appropriate icon based on iconName
   const renderIcon = () => {
     switch (resource.iconName) {
       case 'FileText':
         return <FileText />;
       case 'PlayCircle':
         return <PlayCircle />;
-      case 'Tool':
-        return <Tool />;
+      case 'Wrench':
+        return <Wrench />;
       default:
         return <FileText />;
     }
   };
   
-  // Vérifier si l'utilisateur a accès à cette ressource
   const hasAccess = () => {
     if (userSubscriptionTier === 'vip') return true;
     if (userSubscriptionTier === 'premium' && resource.requiredSubscription !== 'vip') return true;
@@ -56,7 +53,6 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, variants, userSub
     return false;
   };
   
-  // Rendu de l'icône d'abonnement selon le niveau requis
   const renderSubscriptionIcon = () => {
     switch(resource.requiredSubscription) {
       case 'vip':
