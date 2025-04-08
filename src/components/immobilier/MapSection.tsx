@@ -9,43 +9,58 @@ const MapSection = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const mapRef = useRef<HTMLDivElement>(null);
-  const mapLoadedRef = useRef<boolean>(false);
+  const mapInstanceRef = useRef<any>(null);
 
-  const initMap = () => {
-    if (!mapRef.current) return;
+  useEffect(() => {
+    let isMounted = true;
     
-    try {
-      initializeMap(
-        mapRef.current,
-        priceData,
-        () => {
-          setIsLoading(false);
-          mapLoadedRef.current = true;
-        },
-        () => {
+    const loadMap = async () => {
+      if (!mapRef.current) return;
+      
+      try {
+        // Nettoyer les ressources précédentes s'il y en a
+        cleanupGoogleMapsResources();
+        
+        // Charger l'API Google Maps
+        await loadGoogleMapsAPI();
+        
+        // Seulement si le composant est toujours monté
+        if (isMounted && mapRef.current) {
+          // Initialiser la carte
+          const mapInstance = initializeMap(
+            mapRef.current,
+            priceData,
+            () => {
+              if (isMounted) setIsLoading(false);
+            },
+            () => {
+              if (isMounted) {
+                setIsLoading(false);
+                setIsError(true);
+              }
+            }
+          );
+          
+          mapInstanceRef.current = mapInstance;
+        }
+      } catch (error) {
+        console.error("Erreur lors du chargement de la carte:", error);
+        if (isMounted) {
           setIsLoading(false);
           setIsError(true);
         }
-      );
-    } catch (error) {
-      console.error("Erreur lors de l'initialisation de la carte:", error);
-      setIsLoading(false);
-      setIsError(true);
-    }
-  };
-
-  useEffect(() => {
-    const loadMap = async () => {
-      setIsLoading(true);
-      loadGoogleMapsAPI(initMap);
+      }
     };
 
     loadMap();
 
-    // Cleanup function when component unmounts
+    // Nettoyage lors du démontage du composant
     return () => {
-      cleanupGoogleMapsResources();
-      mapLoadedRef.current = false;
+      isMounted = false;
+      if (mapInstanceRef.current) {
+        cleanupGoogleMapsResources();
+        mapInstanceRef.current = null;
+      }
     };
   }, []);
 
@@ -55,14 +70,14 @@ const MapSection = () => {
         <h2 className="text-3xl font-bold mb-3 text-white">Prix immobiliers par localité</h2>
         <p className="mb-8 text-gray-300">Explorez les prix moyens au m² dans les communes du Chablais.</p>
         
-        <div className="bg-noir-dark rounded-lg overflow-hidden">
-          <div className="h-96 w-full relative">
+        <div className="bg-noir-dark rounded-lg overflow-hidden shadow-lg">
+          <div className="h-[500px] w-full relative">
             {isLoading && <MapLoadingSpinner />}
             {isError && <MapError />}
             <div 
               ref={mapRef} 
               className="h-full w-full" 
-              style={{ display: isLoading || isError ? 'none' : 'block' }}
+              style={{ display: isLoading ? 'none' : 'block' }}
               id="google-map"
             />
           </div>
