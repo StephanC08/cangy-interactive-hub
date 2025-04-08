@@ -20,7 +20,7 @@ const PerformanceCard: React.FC<PerformanceCardProps> = ({ performanceData, vari
       <Card className="bg-noir-light border-mauve/20 mb-8">
         <CardHeader>
           <CardTitle className="text-white">Performance</CardTitle>
-          <CardDescription>Analyse sur 7 mois</CardDescription>
+          <CardDescription>Analyse sur 12 mois</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="h-80">

@@ -1,3 +1,4 @@
+
 import { PlayCircle, FileText, Wrench } from "lucide-react";
 import React from "react";
 
@@ -20,18 +21,18 @@ export const itemVariants = {
 };
 
 export const performanceData = [
-  { name: 'Jan', value: 400 },
-  { name: 'Fev', value: 300 },
-  { name: 'Mar', value: 500 },
-  { name: 'Avr', value: 470 },
-  { name: 'Mai', value: 640 },
-  { name: 'Juin', value: 580 },
-  { name: 'Juil', value: 620 },
-  { name: 'Août', value: 750 },
-  { name: 'Sept', value: 800 },
-  { name: 'Oct', value: 750 },
-  { name: 'Nov', value: 820 },
-  { name: 'Déc', value: 900 },
+  { name: 'Jan', visits: 400, conversions: 120 },
+  { name: 'Fev', visits: 300, conversions: 90 },
+  { name: 'Mar', visits: 500, conversions: 150 },
+  { name: 'Avr', visits: 470, conversions: 140 },
+  { name: 'Mai', visits: 640, conversions: 210 },
+  { name: 'Juin', visits: 580, conversions: 170 },
+  { name: 'Juil', visits: 620, conversions: 190 },
+  { name: 'Août', visits: 750, conversions: 240 },
+  { name: 'Sept', visits: 800, conversions: 280 },
+  { name: 'Oct', visits: 750, conversions: 250 },
+  { name: 'Nov', visits: 820, conversions: 300 },
+  { name: 'Déc', visits: 900, conversions: 350 },
 ];
 
 export const getResources = () => [
