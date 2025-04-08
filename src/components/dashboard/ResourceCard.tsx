@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, PlayCircle, Eye, Lock, Star, Crown } from "lucide-react";
+import { Download, PlayCircle, Eye, Lock, Star, Crown, FileText, Tool } from "lucide-react";
 import { motion } from "framer-motion";
 import { SubscriptionTier } from '@/pages/Dashboard';
 import { useToast } from "@/components/ui/use-toast";
@@ -11,7 +11,7 @@ export interface Resource {
   id: number;
   name: string;
   type: "document" | "video" | "tool";
-  icon: React.ReactNode;
+  iconName: string; // Changed from icon: React.ReactNode
   size: string;
   category: string;
   description: string;
@@ -32,6 +32,20 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, variants, userSub
       title: "Mise à niveau requise",
       description: `Cette ressource nécessite un abonnement ${resource.requiredSubscription}.`,
     });
+  };
+  
+  // Function to render the appropriate icon based on iconName
+  const renderIcon = () => {
+    switch (resource.iconName) {
+      case 'FileText':
+        return <FileText />;
+      case 'PlayCircle':
+        return <PlayCircle />;
+      case 'Tool':
+        return <Tool />;
+      default:
+        return <FileText />;
+    }
   };
   
   // Vérifier si l'utilisateur a accès à cette ressource
@@ -75,7 +89,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, variants, userSub
               <CardDescription className="text-gray-400">{resource.size}</CardDescription>
             </div>
             <div className="text-mauve h-12 w-12 flex items-center justify-center rounded-full bg-mauve/10 p-3">
-              {resource.icon}
+              {renderIcon()}
             </div>
           </div>
         </CardHeader>
