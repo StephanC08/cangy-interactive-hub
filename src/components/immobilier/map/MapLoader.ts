@@ -7,6 +7,7 @@ let isScriptLoading = false;
 let mapInstance: any = null;
 let markersCollection: any[] = [];
 let infoWindowsCollection: any[] = [];
+let scriptElement: HTMLScriptElement | null = null;
 
 export const initializeMap = (
   mapElement: HTMLDivElement,
@@ -102,7 +103,6 @@ export const loadGoogleMapsAPI = (callback: () => void): void => {
   
   // If we're already loading the script, don't load it again
   if (isScriptLoading) {
-    // Just register the callback to be called when script loads
     const originalInitMap = window.initMap;
     window.initMap = () => {
       if (originalInitMap) originalInitMap();
@@ -111,12 +111,15 @@ export const loadGoogleMapsAPI = (callback: () => void): void => {
     return;
   }
   
+  // Cleanup any existing script elements
+  cleanupGoogleMapsScript();
+  
   // Set up the script
   isScriptLoading = true;
-  const script = document.createElement('script');
-  script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAEbCmQFd4_a8CfYmJkQO3twlxrMry1Vuw&callback=initMap`;
-  script.async = true;
-  script.defer = true;
+  scriptElement = document.createElement('script');
+  scriptElement.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAEbCmQFd4_a8CfYmJkQO3twlxrMry1Vuw&callback=initMap&loading=async`;
+  scriptElement.async = true;
+  scriptElement.defer = true;
   
   // Store reference to our callback function
   const initMapCallback = callback;
@@ -128,20 +131,29 @@ export const loadGoogleMapsAPI = (callback: () => void): void => {
   };
   
   // Add error handling
-  script.onerror = () => {
+  scriptElement.onerror = () => {
     console.error("Google Maps script failed to load");
     isScriptLoading = false;
     // Remove the script element to avoid potential memory leaks
-    if (script.parentNode) {
-      script.parentNode.removeChild(script);
-    }
+    cleanupGoogleMapsScript();
   };
   
   // Cleanup function for component unmounting
-  script.setAttribute('data-map-script', 'true');
+  scriptElement.setAttribute('data-map-script', 'true');
   
   // Actually add the script to the page
-  document.head.appendChild(script);
+  document.head.appendChild(scriptElement);
+};
+
+// Function to cleanup the Google Maps script element
+const cleanupGoogleMapsScript = (): void => {
+  const existingScripts = document.querySelectorAll('script[data-map-script="true"]');
+  existingScripts.forEach(script => {
+    if (script.parentNode) {
+      script.parentNode.removeChild(script);
+    }
+  });
+  scriptElement = null;
 };
 
 // Function to cleanup Google Maps resources
@@ -165,12 +177,14 @@ export const cleanupGoogleMapsResources = (): void => {
   // Reset the map instance
   mapInstance = null;
   
-  // Clean up the script if needed
-  const mapScript = document.querySelector('script[data-map-script="true"]');
-  if (mapScript && mapScript.parentNode) {
-    mapScript.parentNode.removeChild(mapScript);
-  }
+  // Clean up the script
+  cleanupGoogleMapsScript();
   
   // Reset the loading flag
   isScriptLoading = false;
+  
+  // Clear the global initMap function
+  if (window.initMap) {
+    window.initMap = undefined;
+  }
 };

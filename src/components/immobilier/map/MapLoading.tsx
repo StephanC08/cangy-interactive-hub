@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { MapPin } from 'lucide-react';
 
 export const MapLoadingSpinner = () => (
   <div className="h-full w-full flex items-center justify-center">
@@ -11,16 +12,13 @@ export const MapLoadingSpinner = () => (
 );
 
 export const MapError = () => (
-  <div className="bg-noir-dark p-8 h-96 flex items-center justify-center">
-    <div className="text-center">
+  <div className="h-full w-full bg-noir-dark flex items-center justify-center">
+    <div className="text-center p-8">
       <MapPin size={48} className="text-mauve mx-auto mb-4" />
-      <h3 className="text-xl font-semibold mb-2">Impossible de charger la carte</h3>
+      <h3 className="text-xl font-semibold mb-2 text-white">Impossible de charger la carte</h3>
       <p className="text-gray-400 max-w-md mx-auto">
         Veuillez vérifier votre connexion internet ou la clé API Google Maps.
       </p>
     </div>
   </div>
 );
-
-// We need to import MapPin from lucide-react
-import { MapPin } from 'lucide-react';
