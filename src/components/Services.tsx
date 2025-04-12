@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 
 const serviceData = [
   {
+    id: "web-development",
     icon: <Monitor className="h-12 w-12 text-mauve" />,
     title: "Développement Web",
     description: "Création de sites web performants et sur mesure pour développer votre présence en ligne et attirer de nouveaux clients.",
@@ -14,6 +15,7 @@ const serviceData = [
     buttonText: "En savoir plus",
   },
   {
+    id: "coaching",
     icon: <Users className="h-12 w-12 text-mauve" />,
     title: "Coaching & Accompagnement",
     description: "Suivi personnalisé pour vous aider à atteindre vos objectifs professionnels et personnels avec des stratégies efficaces.",
@@ -22,6 +24,7 @@ const serviceData = [
     buttonText: "Découvrir",
   },
   {
+    id: "immobilier",
     icon: <Home className="h-12 w-12 text-mauve" />,
     title: "Conseil Immobilier",
     description: "Stratégies et solutions adaptées pour vendeurs et acquéreurs dans la région de Thonon-les-Bains et ses environs.",
@@ -46,6 +49,7 @@ const Services: React.FC = () => {
           {serviceData.map((service, index) => (
             <div 
               key={index} 
+              id={service.id}
               className={`flex flex-col ${index % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-8 items-center animate-fade-in`} 
               style={{ animationDelay: `${index * 100}ms` }}
             >

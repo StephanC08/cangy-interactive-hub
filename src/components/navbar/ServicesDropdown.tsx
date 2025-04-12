@@ -26,7 +26,7 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({ scrollToSect
           <li className="row-span-1">
             <NavigationMenuLink asChild>
               <a
-                onClick={() => scrollToSection('services')}
+                onClick={() => scrollToSection('web-development')}
                 className="flex flex-col h-full p-4 no-underline rounded-md outline-none hover:bg-noir hover:text-mauve transition-colors focus:shadow-md cursor-pointer"
               >
                 <div className="text-mauve mb-2">
@@ -42,7 +42,7 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({ scrollToSect
           <li className="row-span-1">
             <NavigationMenuLink asChild>
               <a
-                onClick={() => scrollToSection('services')}
+                onClick={() => scrollToSection('coaching')}
                 className="flex flex-col h-full p-4 no-underline rounded-md outline-none hover:bg-noir hover:text-mauve transition-colors focus:shadow-md cursor-pointer"
               >
                 <div className="text-mauve mb-2">
@@ -58,7 +58,7 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({ scrollToSect
           <li className="row-span-1">
             <NavigationMenuLink asChild>
               <a
-                onClick={() => scrollToSection('services')}
+                onClick={() => scrollToSection('immobilier')}
                 className="flex flex-col h-full p-4 no-underline rounded-md outline-none hover:bg-noir hover:text-mauve transition-colors focus:shadow-md cursor-pointer"
               >
                 <div className="text-mauve mb-2">
