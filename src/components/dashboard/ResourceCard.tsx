@@ -1,9 +1,10 @@
+
 import React from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Download, PlayCircle, Eye, Lock, Star, Crown, FileText, Wrench } from "lucide-react";
 import { motion } from "framer-motion";
-import { SubscriptionTier } from '@/pages/Dashboard';
+import { SubscriptionTier } from '@/types/subscription';
 import { useToast } from "@/components/ui/use-toast";
 
 export interface Resource {

@@ -6,7 +6,7 @@ import { LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import ResourceCard, { Resource } from './ResourceCard';
-import { SubscriptionTier } from '@/pages/Dashboard';
+import { SubscriptionTier } from '@/types/subscription';
 
 interface ResourcesGridProps {
   resources: Resource[];

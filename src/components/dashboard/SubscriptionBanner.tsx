@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Shield, Star, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { SubscriptionTier } from "@/pages/Dashboard";
+import { SubscriptionTier } from "@/types/subscription";
 import { useToast } from "@/components/ui/use-toast";
 
 interface SubscriptionBannerProps {
