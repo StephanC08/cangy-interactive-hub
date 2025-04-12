@@ -21,6 +21,7 @@ const Appointment: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [message, setMessage] = useState<string>('');
+  const [activeTab, setActiveTab] = useState<string>('developpement');
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -78,7 +79,11 @@ const Appointment: React.FC = () => {
           <Card className="lg:col-span-3 card-service p-6 animate-fade-in">
             <form onSubmit={handleSubmit}>
               <div className="mb-6">
-                <Tabs defaultValue="developpement">
+                <Tabs 
+                  defaultValue="developpement" 
+                  value={activeTab} 
+                  onValueChange={setActiveTab}
+                >
                   <TabsList className="w-full grid grid-cols-3">
                     <TabsTrigger value="developpement">Développement Web</TabsTrigger>
                     <TabsTrigger value="coaching">Coaching</TabsTrigger>
@@ -213,7 +218,7 @@ const Appointment: React.FC = () => {
               </div>
             </Card>
 
-            <Tabs defaultValue="developpement">
+            <Tabs value={activeTab} onValueChange={setActiveTab}>
               <TabsContent value="developpement" className="animate-fade-in">
                 <Card className="card-service p-6">
                   <h3 className="text-mauve font-medium text-lg mb-2">Consultation Web</h3>

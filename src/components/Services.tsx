@@ -51,7 +51,7 @@ const Services: React.FC = () => {
               key={index} 
               id={service.id}
               className={`flex flex-col ${index % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-8 items-center animate-fade-in`} 
-              style={{ animationDelay: `${index * 100}ms` }}
+              style={{ animationDelay: `${index * 100}ms`, scrollMarginTop: '100px' }}
             >
               <div className="md:w-1/2">
                 <div className="relative group overflow-hidden rounded-lg">
