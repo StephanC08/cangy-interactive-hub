@@ -1,9 +1,7 @@
 
 import React from "react";
-import { ChevronDown, Monitor, Users, Home, Calendar } from "lucide-react";
+import { ChevronDown, Monitor, Users, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -35,20 +33,20 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
             <ChevronDown size={18} />
           </button>
           <div id="servicesSubMenu" className="hidden pl-4 pt-2 space-y-3">
-            <button
-              onClick={() => scrollToSection('web-development')}
+            <Link
+              to="/developpement-web"
               className="text-white py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
             >
               <Monitor size={16} className="text-mauve mr-2" />
               <span className="text-white">Développement Web</span>
-            </button>
-            <button
-              onClick={() => scrollToSection('coaching')}
+            </Link>
+            <Link
+              to="/coaching"
               className="text-white py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
             >
               <Users size={16} className="text-mauve mr-2" />
               <span className="text-white">Coaching & Accompagnement</span>
-            </button>
+            </Link>
             <Link
               to="/immobilier"
               className="text-white py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
@@ -64,41 +62,6 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
         >
           À propos
         </button>
-        <button
-          onClick={() => scrollToSection('testimonials')}
-          className="text-white py-2 hover:text-mauve transition-colors"
-        >
-          Témoignages
-        </button>
-        <Link to="/immobilier" className="text-white py-2 hover:text-mauve transition-colors">
-          Immobilier
-        </Link>
-        <Link to="/rendez-vous" className="text-white py-2 hover:text-mauve transition-colors flex items-center">
-          <Calendar size={16} className="text-mauve mr-2" />
-          Rendez-vous
-        </Link>
-
-        <SignedIn>
-          <Link to="/espace-membre" className="text-white py-2 hover:text-mauve transition-colors flex items-center">
-            Espace membre
-            <UserButton 
-              appearance={{
-                elements: {
-                  userButtonAvatarBox: 'border-2 border-mauve ml-2'
-                }
-              }}
-            />
-          </Link>
-        </SignedIn>
-        <SignedOut>
-          <Link to="/connexion" className="text-white py-2 hover:text-mauve transition-colors">
-            Connexion
-          </Link>
-          <Link to="/inscription" className="text-white py-2 hover:text-mauve transition-colors">
-            Inscription
-          </Link>
-        </SignedOut>
-
         <Button onClick={handleContactClick} className="btn-primary">
           Contact
         </Button>
