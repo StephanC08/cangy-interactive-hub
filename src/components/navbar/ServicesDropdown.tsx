@@ -22,7 +22,7 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({ scrollToSect
         Services
       </NavigationMenuTrigger>
       <NavigationMenuContent>
-        <ul className="grid gap-3 p-4 w-[350px] md:w-[500px] grid-cols-1 md:grid-cols-3 bg-noir-light">
+        <ul className="grid gap-3 p-4 md:w-[600px] grid-cols-1 md:grid-cols-3 bg-noir-light">
           <li className="row-span-1">
             <NavigationMenuLink asChild>
               <Link

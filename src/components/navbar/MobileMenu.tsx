@@ -18,7 +18,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="md:hidden max-h-screen opacity-100 visible transition-all duration-300 overflow-hidden">
+    <div className="md:hidden max-h-screen opacity-100 visible transition-all duration-300 overflow-y-auto">
       <div className="flex flex-col mt-4 space-y-4 pb-4">
         <div className="relative group">
           <button
