@@ -48,8 +48,8 @@ const Hero: React.FC = () => {
                   style={{ position: 'sticky', top: '25vh' }}
                 />
               </div>
-              <div className="absolute -bottom-2 -right-2 bg-noir-light border border-mauve px-4 py-2 rounded-full z-20">
-                <span className="text-mauve font-medium">15+ ans d'expérience</span>
+              <div className="absolute -bottom-2 -right-2 bg-noir-light border border-mauve px-4 py-2 rounded-full z-20 max-w-xs">
+                <span className="text-mauve font-medium text-xs md:text-sm">"On ne construit rien de grand sans exigence. L'excellence est une discipline, pas un hasard."</span>
               </div>
             </div>
           </div>
