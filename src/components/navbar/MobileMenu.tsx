@@ -1,6 +1,6 @@
 
-import React from "react";
-import { Link } from "react-router-dom";  // Add this import
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { ChevronDown, Monitor, Users, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -15,51 +15,57 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
   handleContactClick,
   scrollToSection,
 }) => {
+  const [servicesOpen, setServicesOpen] = useState(false);
+  
   if (!isOpen) return null;
 
   return (
-    <div className="md:hidden max-h-screen opacity-100 visible transition-all duration-300 overflow-y-auto">
-      <div className="flex flex-col mt-4 space-y-4 pb-4">
-        <div className="relative group">
+    <div className="md:hidden fixed top-[70px] left-0 right-0 bg-noir-light z-50 max-h-[80vh] overflow-y-auto">
+      <div className="flex flex-col mt-4 space-y-4 pb-4 px-6">
+        <div className="relative">
           <button
             className="text-white py-2 hover:text-mauve transition-colors w-full text-left flex items-center justify-between"
-            onClick={() => {
-              const subMenu = document.getElementById('servicesSubMenu');
-              if (subMenu) {
-                subMenu.classList.toggle('hidden');
-              }
-            }}
+            onClick={() => setServicesOpen(!servicesOpen)}
           >
             Services
-            <ChevronDown size={18} />
+            <ChevronDown size={18} className={`transform transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
           </button>
-          <div id="servicesSubMenu" className="hidden pl-4 pt-2 space-y-3">
-            <Link
-              to="/developpement-web"
-              className="text-white py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
-            >
-              <Monitor size={16} className="text-mauve mr-2" />
-              <span className="text-white">Développement Web</span>
-            </Link>
-            <Link
-              to="/coaching"
-              className="text-white py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
-            >
-              <Users size={16} className="text-mauve mr-2" />
-              <span className="text-white">Coaching & Accompagnement</span>
-            </Link>
-            <Link
-              to="/immobilier"
-              className="text-white py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
-            >
-              <Home size={16} className="text-mauve mr-2" />
-              <span className="text-white">Conseil Immobilier</span>
-            </Link>
-          </div>
+          
+          {servicesOpen && (
+            <div className="pl-4 pt-2 space-y-3">
+              <Link
+                to="/developpement-web"
+                className="text-white py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
+                onClick={() => setServicesOpen(false)}
+              >
+                <Monitor size={16} className="text-mauve mr-2" />
+                <span className="text-white">Développement Web</span>
+              </Link>
+              <Link
+                to="/coaching"
+                className="text-white py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
+                onClick={() => setServicesOpen(false)}
+              >
+                <Users size={16} className="text-mauve mr-2" />
+                <span className="text-white">Coaching & Accompagnement</span>
+              </Link>
+              <Link
+                to="/immobilier"
+                className="text-white py-2 hover:text-mauve transition-colors w-full text-left flex items-center"
+                onClick={() => setServicesOpen(false)}
+              >
+                <Home size={16} className="text-mauve mr-2" />
+                <span className="text-white">Conseil Immobilier</span>
+              </Link>
+            </div>
+          )}
         </div>
         <button
-          onClick={() => scrollToSection('about')}
-          className="text-white py-2 hover:text-mauve transition-colors"
+          onClick={() => {
+            scrollToSection('about');
+            // Optionally close the menu after clicking
+          }}
+          className="text-white py-2 hover:text-mauve transition-colors text-left"
         >
           À propos
         </button>

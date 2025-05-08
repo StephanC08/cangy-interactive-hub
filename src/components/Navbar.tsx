@@ -26,11 +26,49 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu when clicking outside or on ESC key
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (isOpen && !target.closest('.mobile-menu-container') && !target.closest('.mobile-menu-button')) {
+        setIsOpen(false);
+      }
+    };
+    
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscKey);
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscKey);
+    };
+  }, [isOpen]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   const handleContactClick = () => {
     toast({
       title: "Contactez-moi",
       description: "Formulaire de contact en cours de développement.",
     });
+    setIsOpen(false);
   };
 
   const scrollToSection = (id: string) => {
@@ -60,15 +98,19 @@ const Navbar: React.FC = () => {
           />
 
           {/* Mobile Menu Button */}
-          <MobileMenuButton isOpen={isOpen} toggleMenu={toggleMenu} />
+          <div className="mobile-menu-button">
+            <MobileMenuButton isOpen={isOpen} toggleMenu={toggleMenu} />
+          </div>
         </div>
 
         {/* Mobile Menu */}
-        <MobileMenu 
-          isOpen={isOpen}
-          handleContactClick={handleContactClick}
-          scrollToSection={scrollToSection}
-        />
+        <div className="mobile-menu-container">
+          <MobileMenu 
+            isOpen={isOpen}
+            handleContactClick={handleContactClick}
+            scrollToSection={scrollToSection}
+          />
+        </div>
       </div>
     </nav>
   );
