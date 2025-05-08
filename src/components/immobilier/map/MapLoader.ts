@@ -31,7 +31,7 @@ export const initializeMap = (
     
     const map = new window.google.maps.Map(mapElement, {
       center: thononPosition,
-      zoom: 10,
+      zoom: 10.5,
       styles: [
         { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
         { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
@@ -67,6 +67,17 @@ export const initializeMap = (
           stylers: [{ color: "#515c6d" }],
         },
       ],
+      disableDefaultUI: false,
+      zoomControl: true,
+      mapTypeControl: true,
+      mapTypeControlOptions: {
+        style: window.google.maps.MapTypeControlStyle.DEFAULT,
+        position: window.google.maps.ControlPosition.TOP_LEFT,
+      },
+      scaleControl: true,
+      streetViewControl: false,
+      rotateControl: false,
+      fullscreenControl: true
     });
     
     mapInstance = map;
@@ -87,6 +98,31 @@ export const initializeMap = (
     const { markers, infoWindows } = addPriceMarkers(map, priceData);
     markersCollection = markers;
     infoWindowsCollection = infoWindows;
+
+    // Open one infoWindow by default (Thonon-les-Bains)
+    if (infoWindows.length > 0 && markers.length > 0) {
+      // Find Thonon-les-Bains marker index
+      const thononIndex = priceData.findIndex(data => data.location === "Thonon-les-Bains");
+      if (thononIndex >= 0 && thononIndex < infoWindows.length) {
+        infoWindows[thononIndex].open(map, markers[thononIndex]);
+      }
+    }
+
+    // Add listener to update markers visibility when zoom changes
+    map.addListener('zoom_changed', () => {
+      const zoom = map.getZoom();
+      if (zoom < 9) {
+        // Hide all markers when zoomed out too far
+        markersCollection.forEach(marker => {
+          marker.setVisible(false);
+        });
+      } else {
+        // Show all markers when zoomed in
+        markersCollection.forEach(marker => {
+          marker.setVisible(true);
+        });
+      }
+    });
 
     // Trigger resize event to ensure map displays correctly
     setTimeout(() => {

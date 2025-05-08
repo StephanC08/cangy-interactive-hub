@@ -4,6 +4,7 @@ import { Section } from '../ui/section';
 import { priceData } from './map/PriceData';
 import { loadGoogleMapsAPI, initializeMap, cleanupGoogleMapsResources } from './map/MapLoader';
 import { MapLoadingSpinner, MapError } from './map/MapLoading';
+import { MapPin, Info } from 'lucide-react';
 
 const MapSection = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -80,6 +81,24 @@ const MapSection = () => {
               style={{ display: isLoading ? 'none' : 'block' }}
               id="google-map"
             />
+            
+            <div className="absolute bottom-4 left-4 bg-noir-dark/80 p-3 rounded-lg border border-mauve/30 backdrop-blur-sm">
+              <div className="flex items-center gap-2 text-sm text-white">
+                <div className="w-3 h-3 rounded-full bg-mauve"></div>
+                <span>Prix au m² par commune</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-6 flex items-start gap-3 bg-noir-light/50 p-4 rounded-lg border border-mauve/10">
+          <Info size={20} className="text-mauve mt-1 flex-shrink-0" />
+          <div>
+            <p className="text-sm text-gray-300">
+              Ces prix sont des moyennes basées sur les transactions immobilières récentes. 
+              Les variations peuvent être importantes selon le type de bien, sa situation exacte et son état.
+              Pour une estimation précise, consultez un professionnel de l'immobilier.
+            </p>
           </div>
         </div>
       </div>
