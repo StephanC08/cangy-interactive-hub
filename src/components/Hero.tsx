@@ -49,7 +49,9 @@ const Hero: React.FC = () => {
                 />
               </div>
               <div className="absolute -bottom-2 -right-2 bg-noir-light border border-mauve px-4 py-2 rounded-full z-20 max-w-xs">
-                <span className="text-mauve font-medium text-xs md:text-sm italic">"On ne construit rien de grand sans exigence. L'excellence est une discipline, pas un hasard."</span>
+                <span className="text-mauve font-medium text-xs md:text-sm italic">
+                  "On ne <span className="text-mauve-light font-semibold">c</span>onstruit rien de grand <span className="text-mauve-light font-semibold">s</span>ans exigence. L'excellence est une discipline, pas un hasard."
+                </span>
               </div>
             </div>
           </div>
