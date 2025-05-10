@@ -1,8 +1,7 @@
 
 import React, { useState } from 'react';
-import { Send } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import MessageInput from './MessageInput';
+import SendButton from './SendButton';
 
 interface ChatInputProps {
   onSendMessage: (text: string) => void;
@@ -30,20 +29,12 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
   return (
     <div className="p-4 border-t border-mauve/10">
       <div className="flex space-x-2">
-        <Input
+        <MessageInput 
           value={inputText}
           onChange={handleInputChange}
           onKeyPress={handleKeyPress}
-          placeholder="Votre message..."
-          className="flex-1 bg-noir border-mauve/20 text-white"
         />
-        <Button 
-          onClick={handleSend} 
-          size="icon" 
-          className="bg-mauve hover:bg-mauve-dark text-noir"
-        >
-          <Send size={18} />
-        </Button>
+        <SendButton onClick={handleSend} />
       </div>
     </div>
   );

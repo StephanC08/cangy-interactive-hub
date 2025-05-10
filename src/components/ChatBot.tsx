@@ -1,88 +1,58 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { useToast } from '@/components/ui/use-toast';
-import { Message, ChatBotProps } from './chatbot/types';
-import { getBotResponse } from './chatbot/chatBotUtils';
+import { ChatBotProps } from './chatbot/types';
+import { useChatWindow } from './chatbot/hooks/useChatWindow';
+import { useMessages } from './chatbot/hooks/useMessages';
 import WelcomeMessage from './chatbot/WelcomeMessage';
 import ChatButton from './chatbot/ChatButton';
 import ChatWindow from './chatbot/ChatWindow';
 
 const ChatBot: React.FC<ChatBotProps> = ({ fullWidth = false, disableWelcomeMessage = false }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [showSuggestions, setShowSuggestions] = useState(true);
-  const [showWelcomeMessage, setShowWelcomeMessage] = useState(false);
   const { toast } = useToast();
   
-  // Modified quick options for service selection
+  // Quick options for service selection
   const quickOptions = [
     { label: "Web", action: "web" },
     { label: "Coaching", action: "coaching" },
     { label: "Immo", action: "immobilier" }
   ];
 
+  const {
+    isOpen,
+    isMinimized,
+    showWelcomeMessage,
+    toggleChat,
+    toggleMinimize,
+    handleCloseWelcomeMessage,
+    initializeWelcomeMessage
+  } = useChatWindow();
+
+  const {
+    messages,
+    showSuggestions,
+    initializeMessages,
+    sendMessage,
+    handleQuestionClick
+  } = useMessages();
+
+  // Initialize welcome message based on session
   useEffect(() => {
-    // Only show welcome message if not disabled
-    if (!disableWelcomeMessage) {
-      const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
-      
-      if (!hasSeenWelcome) {
-        const timer = setTimeout(() => {
-          setShowWelcomeMessage(true);
-        }, 8000); // Show after intro animation
-        
-        return () => clearTimeout(timer);
-      }
-    }
+    return initializeWelcomeMessage(disableWelcomeMessage);
   }, [disableWelcomeMessage]);
   
+  // Initialize messages when chat is opened
   useEffect(() => {
-    // Initialize messages with personalized greeting when opened
-    if (isOpen && messages.length === 0) {
-      const hour = new Date().getHours();
-      let greeting = "Bonjour";
-      
-      if (hour >= 12 && hour < 18) {
-        greeting = "Bon après-midi";
-      } else if (hour >= 18 || hour < 5) {
-        greeting = "Bonsoir";
-      }
-      
-      const initialMsg: Message = {
-        id: 1,
-        text: `${greeting} ! Je suis l'assistant virtuel de Stephan CANGY. Besoin d'un site web ? D'un plan stratégique ? D'estimer, acheter ou vendre un bien ? D'obtenir un accompagnement ou des conseils personnalisés ?`,
-        sender: 'bot',
-        timestamp: new Date(),
-      };
-      
-      setMessages([initialMsg]);
+    if (isOpen) {
+      initializeMessages();
     }
-  }, [isOpen, messages.length]);
-
-  const toggleChat = () => {
-    setIsOpen(!isOpen);
-    if (isMinimized) setIsMinimized(false);
-    if (showWelcomeMessage) {
-      setShowWelcomeMessage(false);
-      sessionStorage.setItem('hasSeenWelcome', 'true');
-    }
-  };
-
-  const toggleMinimize = () => {
-    setIsMinimized(!isMinimized);
-  };
+  }, [isOpen]);
 
   const navigateToPage = (page: string) => {
     if (window.location.pathname !== `/${page}`) {
       window.location.href = `/${page}`;
     }
-  };
-
-  const handleQuestionClick = (question: string) => {
-    sendMessage(question);
-    setShowSuggestions(false);
   };
   
   const handleQuickOptionClick = (option: string) => {
@@ -103,45 +73,11 @@ const ChatBot: React.FC<ChatBotProps> = ({ fullWidth = false, disableWelcomeMess
         break;
     }
     
-    sendMessage(messageText);
-  };
-
-  const sendMessage = (text: string) => {
-    if (!text.trim()) return;
-    
-    // Add user message
-    const userMessage: Message = {
-      id: messages.length + 1,
-      text: text,
-      sender: 'user',
-      timestamp: new Date(),
-    };
-    
-    setMessages(prevMessages => [...prevMessages, userMessage]);
-    
-    // Simulate bot response after a short delay
-    setTimeout(() => {
-      const { response, redirect } = getBotResponse(text);
-      
-      const botResponse: Message = {
-        id: messages.length + 2,
-        text: response,
-        sender: 'bot',
-        timestamp: new Date(),
-      };
-      
-      setMessages(prevMessages => [...prevMessages, botResponse]);
-      
-      // Handle redirection if needed
-      if (redirect) {
-        setTimeout(() => navigateToPage("immobilier"), 1000);
-      }
-    }, 800);
-  };
-
-  const handleCloseWelcomeMessage = () => {
-    setShowWelcomeMessage(false);
-    sessionStorage.setItem('hasSeenWelcome', 'true');
+    const result = sendMessage(messageText);
+    // Handle redirect if needed
+    if (result && result.redirect) {
+      setTimeout(() => navigateToPage("immobilier"), 1000);
+    }
   };
 
   return (
