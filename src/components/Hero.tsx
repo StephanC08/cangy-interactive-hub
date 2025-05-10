@@ -1,9 +1,24 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
 
 const Hero: React.FC = () => {
+  const [greeting, setGreeting] = useState('');
+  
+  useEffect(() => {
+    // Set dynamic greeting based on time of day
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) {
+      setGreeting("Ce matin, le changement commence par une décision : Ne plus se contenter de l'essentiel uniquement... L'excellence n'attend pas. Elle se choisit, se cultive, s'impose !");
+    } else if (hour >= 12 && hour < 18) {
+      setGreeting("Cet après-midi, transformez vos ambitions en actions. L'excellence n'attend pas. Elle se choisit, se cultive, s'impose !");
+    } else {
+      setGreeting("Le succès ne dort jamais. Et vous ? On ne construit rien de grand sans exigence !");
+    }
+  }, []);
+
   const scrollToServices = () => {
     document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -12,42 +27,135 @@ const Hero: React.FC = () => {
     document.getElementById('appointment')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Animation variants for text
+  const titleContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.3
+      }
+    }
+  };
+  
+  const titleChar = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100
+      }
+    }
+  };
+
+  const title = "Entrepreneur & Infopreneur";
+  
   return (
-    <section className="min-h-screen bg-noir-dark flex items-center relative">
+    <section className="min-h-screen bg-noir-dark flex items-center relative overflow-hidden">
+      {/* Background particles effect */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(155,135,245,0.05)_0%,rgba(18,18,18,0)_60%)]"></div>
+      
       <div className="container mx-auto px-6 py-12 md:py-0 z-10">
         <div className="flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 animate-fade-in mt-20 md:mt-0">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white leading-tight mb-4">
-              Entrepreneur <span className="mauve-gradient-text">&</span> Infopreneur
-            </h1>
-            <h2 className="text-xl md:text-2xl text-mauve font-medium mb-6">
+          <div className="md:w-1/2 mt-20 md:mt-0">
+            {/* Animated title with letter by letter animation */}
+            <motion.h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white leading-tight mb-4"
+              variants={titleContainer}
+              initial="hidden"
+              animate="visible"
+            >
+              {title.split('').map((char, index) => (
+                <motion.span
+                  key={index}
+                  variants={titleChar}
+                  className={char === '&' ? "mauve-gradient-text" : ""}
+                >
+                  {char === ' ' ? '\u00A0' : char}
+                </motion.span>
+              ))}
+            </motion.h1>
+            
+            <motion.h2 
+              className="text-xl md:text-2xl text-mauve font-medium mb-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5, duration: 0.8 }}
+            >
               Développement Web, Coaching & Immobilier
-            </h2>
-            <p className="text-gray-300 text-lg mb-8 max-w-xl">
-              Développez votre activité avec un accompagnement sur mesure et des solutions innovantes pour atteindre vos objectifs professionnels et personnels.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button onClick={scrollToServices} className="btn-primary">
-                Découvrir mes services
-                <ArrowRight size={16} />
+            </motion.h2>
+            
+            <motion.p 
+              className="text-gray-300 text-lg mb-8 max-w-xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.8, duration: 0.8 }}
+            >
+              {greeting}
+            </motion.p>
+            
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2.2, duration: 0.8 }}
+            >
+              <Button 
+                onClick={scrollToServices} 
+                className="btn-primary relative overflow-hidden group"
+              >
+                <span className="relative z-10">
+                  Découvrir mes services
+                  <ArrowRight size={16} />
+                </span>
+                <span className="absolute inset-0 bg-white/10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
               </Button>
-              <Button onClick={scrollToAppointment} variant="outline" className="btn-secondary">
-                Prendre rendez-vous
+              
+              <Button 
+                onClick={scrollToAppointment} 
+                variant="outline" 
+                className="btn-secondary relative overflow-hidden group"
+              >
+                <span className="relative z-10">Prendre rendez-vous</span>
+                <span className="absolute inset-0 bg-mauve/10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
               </Button>
-            </div>
+            </motion.div>
           </div>
-          <div className="md:w-1/2 mt-10 md:mt-0 flex justify-center animate-fade-in animation-delay-300">
+          
+          <motion.div 
+            className="md:w-1/2 mt-10 md:mt-0 flex justify-center"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+          >
             <div className="relative">
-              <div className="w-64 h-64 md:w-80 md:h-80 bg-mauve/10 rounded-full absolute -top-4 -left-4"></div>
+              <motion.div 
+                className="w-64 h-64 md:w-80 md:h-80 bg-mauve/10 rounded-full absolute -top-4 -left-4"
+                animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.8, 0.5] }}
+                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+              ></motion.div>
+              
               <div className="sticky top-32 z-10">
-                <img
-                  src="/lovable-uploads/a0bca79c-615a-4b2f-9c67-101f7f821c66.png"
-                  alt="Stephan CANGY"
-                  className="w-64 h-64 md:w-80 md:h-80 object-cover object-top rounded-full border-4 border-mauve/30"
-                  style={{ position: 'sticky', top: '25vh' }}
-                />
+                <motion.div
+                  whileHover={{ 
+                    boxShadow: "0 0 25px rgba(155, 135, 245, 0.5)",
+                    scale: 1.02,
+                    transition: { duration: 0.3 }
+                  }}
+                >
+                  <img
+                    src="/lovable-uploads/a0bca79c-615a-4b2f-9c67-101f7f821c66.png"
+                    alt="Stephan CANGY"
+                    className="w-64 h-64 md:w-80 md:h-80 object-cover object-top rounded-full border-4 border-mauve/30"
+                    style={{ position: 'sticky', top: '25vh' }}
+                  />
+                </motion.div>
               </div>
+              
               <div className="absolute -bottom-2 -right-2 bg-noir-light border border-mauve px-4 py-2 rounded-full z-20 max-w-xs">
                 <span className="text-mauve font-medium text-xs md:text-sm italic">
                   "On ne <span className="text-mauve-light font-semibold">c</span>onstruit rien de grand 
@@ -56,11 +164,16 @@ const Hero: React.FC = () => {
                 </span>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden md:block">
+        
+        <motion.div 
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:block"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+        >
           <ChevronDown className="text-mauve" size={36} />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

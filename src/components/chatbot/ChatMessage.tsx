@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Message } from './types';
 
 interface ChatMessageProps {
@@ -13,6 +14,12 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
         message.sender === 'user' ? 'justify-end' : 'justify-start'
       }`}
     >
+      {message.sender === 'bot' && (
+        <div className="w-8 h-8 rounded-full bg-mauve/30 flex items-center justify-center mr-2 flex-shrink-0">
+          <span className="text-xs text-white font-bold">SC</span>
+        </div>
+      )}
+      
       <div
         className={`max-w-[80%] p-3 rounded-lg ${
           message.sender === 'user'
@@ -28,6 +35,12 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
           })}
         </p>
       </div>
+      
+      {message.sender === 'user' && (
+        <div className="w-8 h-8 rounded-full bg-mauve/20 flex items-center justify-center ml-2 flex-shrink-0">
+          <span className="text-xs text-white">Vous</span>
+        </div>
+      )}
     </div>
   );
 };

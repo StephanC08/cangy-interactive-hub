@@ -7,6 +7,7 @@ import Appointment from '@/components/Appointment';
 import Testimonials from '@/components/Testimonials';
 import ChatBot from '@/components/ChatBot';
 import Footer from '@/components/Footer';
+import IntroAnimation from '@/components/IntroAnimation';
 
 const Index = () => {
   useEffect(() => {
@@ -15,15 +16,16 @@ const Index = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-noir text-white">
+      <IntroAnimation />
       <Navbar />
       <main className="flex-grow">
         <Hero />
         <Services />
         <Appointment />
         <Testimonials />
-        <ChatBot />
       </main>
       <Footer />
+      <ChatBot />
     </div>
   );
 };

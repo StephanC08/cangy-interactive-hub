@@ -16,3 +16,8 @@ export interface ChatResponseData {
   response: string;
   redirect?: boolean;
 }
+
+export interface QuickOption {
+  label: string;
+  action: string;
+}
