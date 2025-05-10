@@ -1,15 +1,9 @@
-
 import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ChatMessage from './ChatMessage';
 import SuggestedQuestions from './SuggestedQuestions';
-import { Message } from './types';
+import { Message, QuickOption } from './types';
 import { suggestedQuestions } from './chatBotUtils';
-
-interface QuickOption {
-  label: string;
-  action: string;
-}
 
 interface ChatMessagesProps {
   messages: Message[];
