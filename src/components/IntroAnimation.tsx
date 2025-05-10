@@ -14,6 +14,9 @@ const IntroAnimation: React.FC = () => {
   ];
   
   useEffect(() => {
+    // Force intro to be shown when the component mounts
+    setShowIntro(true);
+    
     // Cycle through text phrases
     if (currentText < introPhrases.length - 1) {
       const timer = setTimeout(() => {
@@ -28,16 +31,6 @@ const IntroAnimation: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, [currentText]);
-
-  // Save intro seen state in session storage
-  useEffect(() => {
-    const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
-    if (hasSeenIntro) {
-      setShowIntro(false);
-    } else {
-      sessionStorage.setItem('hasSeenIntro', 'true');
-    }
-  }, []);
   
   if (!showIntro) return null;
   
@@ -69,8 +62,15 @@ const IntroAnimation: React.FC = () => {
                 transition={{ delay: 0.5, duration: 0.5 }}
                 className="mt-12"
               >
-                <div className="w-24 h-24 mx-auto flex items-center justify-center rounded-full border-2 border-mauve">
-                  <span className="text-mauve text-2xl font-bold">SC</span>
+                <div className="w-32 h-32 mx-auto flex items-center justify-center">
+                  <motion.img 
+                    src="/lovable-uploads/1fe917ce-0c66-4ac1-892b-5695abc25f8a.png"
+                    alt="Stephan CANGY Logo"
+                    className="w-full h-full object-contain"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.7, duration: 0.8 }}
+                  />
                 </div>
               </motion.div>
             )}

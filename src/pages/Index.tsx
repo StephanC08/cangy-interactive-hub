@@ -12,6 +12,9 @@ import IntroAnimation from '@/components/IntroAnimation';
 const Index = () => {
   useEffect(() => {
     document.title = 'Stephan CANGY | Entrepreneur & Infopreneur';
+    
+    // Clear any stored intro animation state to ensure it shows every time
+    sessionStorage.removeItem('hasSeenIntro');
   }, []);
 
   return (
@@ -25,7 +28,7 @@ const Index = () => {
         <Testimonials />
       </main>
       <Footer />
-      <ChatBot />
+      <ChatBot disableWelcomeMessage={true} />
     </div>
   );
 };

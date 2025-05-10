@@ -10,6 +10,7 @@ export type PredefinedResponses = Record<string, string>;
 
 export interface ChatBotProps {
   fullWidth?: boolean;
+  disableWelcomeMessage?: boolean;
 }
 
 export interface ChatResponseData {

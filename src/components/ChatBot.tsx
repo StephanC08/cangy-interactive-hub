@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { MessageSquare } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
@@ -9,7 +8,7 @@ import ChatInput from './chatbot/ChatInput';
 import { Message, ChatBotProps } from './chatbot/types';
 import { initialMessages, getBotResponse } from './chatbot/chatBotUtils';
 
-const ChatBot: React.FC<ChatBotProps> = ({ fullWidth = false }) => {
+const ChatBot: React.FC<ChatBotProps> = ({ fullWidth = false, disableWelcomeMessage = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -25,17 +24,19 @@ const ChatBot: React.FC<ChatBotProps> = ({ fullWidth = false }) => {
   ];
 
   useEffect(() => {
-    // Show welcome message after a short delay when user first visits
-    const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
-    
-    if (!hasSeenWelcome) {
-      const timer = setTimeout(() => {
-        setShowWelcomeMessage(true);
-      }, 8000); // Show after intro animation
+    // Only show welcome message if not disabled
+    if (!disableWelcomeMessage) {
+      const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
       
-      return () => clearTimeout(timer);
+      if (!hasSeenWelcome) {
+        const timer = setTimeout(() => {
+          setShowWelcomeMessage(true);
+        }, 8000); // Show after intro animation
+        
+        return () => clearTimeout(timer);
+      }
     }
-  }, []);
+  }, [disableWelcomeMessage]);
   
   useEffect(() => {
     // Initialize messages with personalized greeting when opened
@@ -140,9 +141,9 @@ const ChatBot: React.FC<ChatBotProps> = ({ fullWidth = false }) => {
 
   return (
     <>
-      {/* Welcome message popup */}
+      {/* Welcome message popup - only show if not disabled */}
       <AnimatePresence>
-        {showWelcomeMessage && (
+        {showWelcomeMessage && !disableWelcomeMessage && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
