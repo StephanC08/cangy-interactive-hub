@@ -1,102 +1,130 @@
 
 import React from 'react';
-import { Monitor, Users, Home, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { Link } from 'react-router-dom';
+import { Monitor, Code, UserCheck, BarChart, Home, Key } from 'lucide-react';
 
-const serviceData = [
+const services = [
   {
-    id: "web-development",
-    icon: <Monitor className="h-12 w-12 text-mauve" />,
+    icon: <Monitor />,
     title: "Développement Web",
-    description: "Création de sites web performants et sur mesure pour développer votre présence en ligne et attirer de nouveaux clients.",
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    features: ["Sites vitrines professionnels", "E-commerce performants", "Applications web sur mesure", "Audits et optimisation SEO"],
-    buttonText: "En savoir plus",
+    description: "Des sites web performants, élégants et centrés sur vos objectifs business.",
+    features: ["Sites vitrines", "E-commerce", "Applications web", "Refonte et optimisation"],
+    route: "/developpement-web",
+    experience: "/experiences/design-ton-site",
+    experienceText: "Design ton site idéal"
   },
   {
-    id: "coaching",
-    icon: <Users className="h-12 w-12 text-mauve" />,
-    title: "Coaching & Accompagnement",
-    description: "Suivi personnalisé pour vous aider à atteindre vos objectifs professionnels et personnels avec des stratégies efficaces.",
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    features: ["Développement personnel", "Stratégie d'entreprise", "Productivité et organisation", "Transition professionnelle"],
-    buttonText: "Découvrir",
+    icon: <UserCheck />,
+    title: "Coaching",
+    description: "Un accompagnement personnalisé pour révéler votre potentiel et atteindre vos objectifs.",
+    features: ["Vision claire", "Stratégie d'action", "Développement personnel", "Suivi et ajustement"],
+    route: "/coaching",
+    experience: "/experiences/debloque-ton-niveau",
+    experienceText: "Débloque ton prochain niveau"
   },
   {
-    id: "immobilier",
-    icon: <Home className="h-12 w-12 text-mauve" />,
+    icon: <Home />,
     title: "Conseil Immobilier",
-    description: "Stratégies et solutions adaptées pour vendeurs et acquéreurs dans la région de Thonon-les-Bains et ses environs.",
-    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80",
-    features: ["Estimations précises", "Conseils personnalisés", "Accompagnement complet", "Stratégie d'investissement"],
-    buttonText: "Consulter",
+    description: "Des solutions immobilières adaptées à vos projets dans la région du Chablais.",
+    features: ["Achat", "Vente", "Investissement", "Stratégie patrimoniale"],
+    route: "/immobilier",
+    experience: "/experiences/mission-rentabilite",
+    experienceText: "Mission Rentabilité"
   }
 ];
 
-const Services: React.FC = () => {
+const Services = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3
+      }
+    }
+  };
+  
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8 }
+    }
+  };
+
   return (
-    <section id="services" className="bg-noir py-16 md:py-24">
+    <section id="services" className="py-20 bg-noir-light">
       <div className="container mx-auto px-6">
-        <div className="mb-12 text-center">
-          <h2 className="section-title mx-auto after:left-1/2 after:-translate-x-1/2">Mes Services</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto mt-6">
-            Des prestations sur mesure pour vous accompagner dans vos projets et vous aider à atteindre vos objectifs avec des solutions adaptées à vos besoins.
-          </p>
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8 }}
+          >
+            Mes Services
+          </motion.h2>
+          <motion.p 
+            className="text-gray-300"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Des solutions sur mesure pour répondre à vos besoins spécifiques et vous aider à atteindre vos objectifs.
+          </motion.p>
         </div>
         
-        <div className="space-y-16">
-          {serviceData.map((service, index) => (
-            <div 
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
+          {services.map((service, index) => (
+            <motion.div 
               key={index} 
-              id={service.id}
-              className={`flex flex-col ${index % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-8 items-center animate-fade-in`} 
-              style={{ animationDelay: `${index * 100}ms`, scrollMarginTop: '100px' }}
+              className="bg-noir border border-mauve/20 rounded-lg p-8 h-full flex flex-col"
+              variants={itemVariants}
+              whileHover={{ 
+                y: -5, 
+                boxShadow: "0 10px 25px -5px rgba(126, 105, 171, 0.15)", 
+                transition: { duration: 0.3 } 
+              }}
             >
-              <div className="md:w-1/2">
-                <div className="relative group overflow-hidden rounded-lg">
-                  <img 
-                    src={service.image} 
-                    alt={service.title} 
-                    className="w-full h-64 md:h-80 object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-noir-dark to-transparent opacity-70"></div>
-                  <div className="absolute bottom-0 left-0 p-6">
-                    <div className="mb-3">{service.icon}</div>
-                    <h3 className="text-2xl text-white font-bold mb-2">{service.title}</h3>
-                  </div>
-                </div>
+              <div className="bg-mauve/10 rounded-full w-14 h-14 flex items-center justify-center mb-6">
+                <span className="text-mauve">{service.icon}</span>
               </div>
-              
-              <div className="md:w-1/2">
-                <h3 className="text-2xl text-white font-bold mb-3">{service.title}</h3>
-                <p className="text-gray-300 mb-4">{service.description}</p>
-                <ul className="space-y-2 mb-6">
-                  {service.features.map((feature, i) => (
-                    <li key={i} className="flex items-start">
-                      <div className="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-mauve flex-shrink-0"></div>
-                      <span className="text-gray-300">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button className="btn-primary">
-                  {service.buttonText}
-                  <ArrowRight size={16} />
-                </Button>
+              <h3 className="text-xl font-semibold mb-4">{service.title}</h3>
+              <p className="text-gray-400 mb-6">{service.description}</p>
+              <ul className="mb-8">
+                {service.features.map((feature, i) => (
+                  <li key={i} className="flex items-center mb-2">
+                    <span className="h-1.5 w-1.5 bg-mauve rounded-full mr-2"></span>
+                    <span className="text-gray-300">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-auto space-y-3">
+                <Link to={service.route} className="w-full">
+                  <Button className="w-full bg-mauve hover:bg-mauve/80">
+                    En savoir plus
+                  </Button>
+                </Link>
+                <Link to={service.experience} className="w-full">
+                  <Button variant="outline" className="w-full border-mauve/30 hover:bg-mauve hover:text-white">
+                    {service.experienceText}
+                  </Button>
+                </Link>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
-        
-        <div className="mt-16 text-center">
-          <h3 className="section-subtitle mx-auto after:left-1/2 after:-translate-x-1/2">Des besoins spécifiques ?</h3>
-          <p className="text-gray-400 max-w-2xl mx-auto mb-8">
-            Chaque projet est unique. Discutons ensemble de vos besoins pour trouver la solution qui vous convient parfaitement.
-          </p>
-          <Button className="btn-primary">
-            Demander un devis personnalisé
-          </Button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

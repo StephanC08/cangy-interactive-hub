@@ -13,19 +13,22 @@ const AboutServices = () => {
       icon: <Globe className="text-mauve" size={32} />,
       title: "Développement web",
       description: "La création de sites web élégants, performants et orientés conversion",
-      route: "/developpement-web"
+      route: "/developpement-web",
+      experience: "/experiences/design-ton-site"
     },
     {
       icon: <UserCheck className="text-mauve" size={32} />,
       title: "Coaching",
       description: "Le coaching & l'accompagnement personnalisé, pour clarifier une vision, structurer une action, atteindre des objectifs pro & perso",
-      route: "/coaching"
+      route: "/coaching",
+      experience: "/experiences/debloque-ton-niveau"
     },
     {
       icon: <Home className="text-mauve" size={32} />,
       title: "Conseil immobilier",
       description: "Le conseil immobilier stratégique, pour acheter ou vendre sereinement dans la région du Chablais",
-      route: "/immobilier"
+      route: "/immobilier",
+      experience: "/experiences/mission-rentabilite"
     }
   ];
   
@@ -95,13 +98,22 @@ const AboutServices = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-4">{service.title}</h3>
                 <p className="text-gray-300 mb-6">{service.description}</p>
-                <Button 
-                  variant="link" 
-                  className="text-mauve hover:text-mauve-light p-0"
-                  onClick={() => navigate(service.route)}
-                >
-                  En savoir plus →
-                </Button>
+                <div className="space-y-3">
+                  <Button 
+                    variant="link" 
+                    className="text-mauve hover:text-mauve-light p-0 w-full justify-start"
+                    onClick={() => navigate(service.route)}
+                  >
+                    En savoir plus →
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-mauve/30 hover:bg-mauve hover:text-white text-sm"
+                    onClick={() => navigate(service.experience)}
+                  >
+                    Essayer l'expérience interactive
+                  </Button>
+                </div>
               </motion.div>
             ))}
           </motion.div>
