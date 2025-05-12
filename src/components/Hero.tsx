@@ -158,8 +158,8 @@ const Hero: React.FC = () => {
               
               <div className="absolute -bottom-2 -right-2 bg-noir-light border border-mauve px-4 py-2 rounded-full z-20 max-w-xs">
                 <span className="text-mauve font-medium text-xs md:text-sm italic">
-                  "On ne <span className="text-mauve-light font-semibold">c</span>onstruit rien de grand 
-                  <span className="text-mauve-light font-semibold"> s</span>ans exigen<span className="text-mauve-light font-semibold">c</span>e. 
+                  "On ne <span className="text-mauve-light font-semibold">c</span>on<span className="text-mauve-light font-semibold">s</span>truit rien de grand 
+                  <span className="text-mauve-light font-semibold"> s</span>an<span className="text-mauve-light font-semibold">s</span> exigen<span className="text-mauve-light font-semibold">c</span>e. 
                   L'ex<span className="text-mauve-light font-semibold">c</span>ellen<span className="text-mauve-light font-semibold">c</span>e e<span className="text-mauve-light font-semibold">s</span>t une di<span className="text-mauve-light font-semibold">s</span><span className="text-mauve-light font-semibold">c</span>ipline, pa<span className="text-mauve-light font-semibold">s</span> un ha<span className="text-mauve-light font-semibold">s</span>ard."
                 </span>
               </div>

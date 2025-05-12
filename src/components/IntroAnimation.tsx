@@ -17,17 +17,17 @@ const IntroAnimation: React.FC = () => {
     // Force intro to be shown when the component mounts
     setShowIntro(true);
     
-    // Cycle through text phrases
+    // Cycle through text phrases with longer duration
     if (currentText < introPhrases.length - 1) {
       const timer = setTimeout(() => {
         setCurrentText(currentText + 1);
-      }, 1500);
+      }, 2500); // Increased from 1500ms to 2500ms
       return () => clearTimeout(timer);
     } else {
-      // After last text, wait and then hide intro
+      // After last text, wait longer before hiding intro
       const timer = setTimeout(() => {
         setShowIntro(false);
-      }, 2000);
+      }, 3000); // Increased from 2000ms to 3000ms
       return () => clearTimeout(timer);
     }
   }, [currentText]);
@@ -40,7 +40,7 @@ const IntroAnimation: React.FC = () => {
         <motion.div
           className="fixed inset-0 bg-noir-dark z-50 flex flex-col items-center justify-center"
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1.2 }} // Increased from 0.8s to 1.2s
         >
           <div className="max-w-md mx-auto text-center">
             <AnimatePresence mode="wait">
@@ -49,6 +49,7 @@ const IntroAnimation: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 1 }} // Increased from default
                 className="text-2xl md:text-3xl text-white font-heading"
               >
                 {introPhrases[currentText]}
@@ -59,7 +60,7 @@ const IntroAnimation: React.FC = () => {
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
+                transition={{ delay: 1, duration: 1 }} // Increased delay from 0.5s to 1s
                 className="mt-12"
               >
                 <div className="w-32 h-32 mx-auto flex items-center justify-center">
@@ -69,7 +70,7 @@ const IntroAnimation: React.FC = () => {
                     className="w-full h-full object-contain"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 0.7, duration: 0.8 }}
+                    transition={{ delay: 1.5, duration: 1 }} // Increased delay from 0.7s to 1.5s
                   />
                 </div>
               </motion.div>
@@ -79,7 +80,7 @@ const IntroAnimation: React.FC = () => {
           <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.7 }}
-            transition={{ delay: 4 }}
+            transition={{ delay: 5 }} // Increased from 4s to 5s
             onClick={() => setShowIntro(false)}
             className="absolute bottom-8 text-white/50 hover:text-white text-sm"
           >

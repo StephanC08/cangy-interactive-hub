@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import DeveloppementWeb from "./pages/DeveloppementWeb";
 import Coaching from "./pages/Coaching";
 import Immobilier from "./pages/Immobilier";
+import About from "./pages/About";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/developpement-web" element={<DeveloppementWeb />} />
           <Route path="/coaching" element={<Coaching />} />
           <Route path="/immobilier" element={<Immobilier />} />
+          <Route path="/a-propos" element={<About />} />
           <Route path="*" element={<Index />} />
         </Routes>
       </BrowserRouter>
