@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Message } from '../types';
+import { Message, ChatResponseData } from '../types';
 import { getBotResponse } from '../chatBotUtils';
 
 export function useMessages() {
@@ -29,7 +29,7 @@ export function useMessages() {
     }
   };
 
-  const sendMessage = (text: string) => {
+  const sendMessage = (text: string): void => {
     if (!text.trim()) return;
     
     // Add user message
@@ -54,8 +54,6 @@ export function useMessages() {
       };
       
       setMessages(prevMessages => [...prevMessages, botResponse]);
-      
-      return { redirect };
     }, 800);
   };
 

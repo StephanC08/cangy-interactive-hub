@@ -73,9 +73,11 @@ const ChatBot: React.FC<ChatBotProps> = ({ fullWidth = false, disableWelcomeMess
         break;
     }
     
-    const result = sendMessage(messageText);
-    // Handle redirect if needed
-    if (result && result.redirect) {
+    // Send the message without checking the return value
+    sendMessage(messageText);
+    
+    // If the option is "immobilier", redirect after a delay
+    if (option === "immobilier") {
       setTimeout(() => navigateToPage("immobilier"), 1000);
     }
   };
