@@ -5,7 +5,6 @@ import Hero from '@/components/Hero';
 import Services from '@/components/Services';
 import Appointment from '@/components/Appointment';
 import Testimonials from '@/components/Testimonials';
-import ChatBot from '@/components/ChatBot';
 import Footer from '@/components/Footer';
 import IntroAnimation from '@/components/IntroAnimation';
 
@@ -28,7 +27,6 @@ const Index = () => {
         <Testimonials />
       </main>
       <Footer />
-      <ChatBot disableWelcomeMessage={true} />
     </div>
   );
 };

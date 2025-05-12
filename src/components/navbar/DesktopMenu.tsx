@@ -24,12 +24,12 @@ export const DesktopMenu: React.FC<DesktopMenuProps> = ({
           <ServicesDropdown scrollToSection={scrollToSection} />
         </NavigationMenuList>
       </NavigationMenu>
-      <button 
-        onClick={() => scrollToSection('about')}
+      <Link 
+        to="/a-propos"
         className="text-white hover:text-mauve transition-colors"
       >
         À propos
-      </button>
+      </Link>
       <Button onClick={handleContactClick} className="btn-primary">
         Contact
       </Button>

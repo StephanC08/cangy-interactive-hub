@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import ChatBot from '@/components/ChatBot';
 import AboutHero from '@/components/about/AboutHero';
 import AboutStory from '@/components/about/AboutStory';
 import AboutMission from '@/components/about/AboutMission';
@@ -29,7 +28,6 @@ const About = () => {
         <SignatureFooter />
       </main>
       <Footer />
-      <ChatBot />
     </div>
   );
 };

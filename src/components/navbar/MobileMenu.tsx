@@ -60,15 +60,12 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
             </div>
           )}
         </div>
-        <button
-          onClick={() => {
-            scrollToSection('about');
-            // Optionally close the menu after clicking
-          }}
+        <Link
+          to="/a-propos"
           className="text-white py-2 hover:text-mauve transition-colors text-left"
         >
           À propos
-        </button>
+        </Link>
         <Button onClick={handleContactClick} className="btn-primary">
           Contact
         </Button>
