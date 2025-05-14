@@ -1,10 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const IntroAnimation: React.FC = () => {
   const [showIntro, setShowIntro] = useState(true);
   const [currentText, setCurrentText] = useState(0);
+  const isMobile = useIsMobile();
   
   const introPhrases = [
     "Derrière chaque réussite,",
@@ -42,7 +44,7 @@ const IntroAnimation: React.FC = () => {
           exit={{ opacity: 0 }}
           transition={{ duration: 1.5 }}
         >
-          <div className="max-w-md mx-auto text-center relative h-32">
+          <div className={`max-w-md mx-auto text-center relative h-32 ${isMobile ? 'px-4' : ''}`}>
             <AnimatePresence mode="wait">
               <motion.p
                 key={currentText}
