@@ -26,7 +26,7 @@ const SignatureFooter = () => {
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto text-center">
           <motion.p 
-            className="text-xl md:text-2xl font-heading mb-6 text-white italic"
+            className="text-xl md:text-2xl font-heading mb-4 text-white italic"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -35,10 +35,10 @@ const SignatureFooter = () => {
             Et si on avançait ensemble ?
           </motion.p>
           
-          <div ref={ref} className="relative h-24 md:h-32">
+          <div ref={ref} className="relative h-20 md:h-28 flex items-center justify-center">
             <motion.svg 
               viewBox="0 0 200 100" 
-              className="w-full h-auto stroke-mauve"
+              className="w-full h-auto absolute stroke-mauve"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 1 }}
@@ -54,7 +54,7 @@ const SignatureFooter = () => {
             </motion.svg>
             
             <motion.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-24 md:h-24"
+              className="w-20 h-20 md:w-24 md:h-24 z-10 absolute"
               initial={{ opacity: 0, scale: 0 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 2, duration: 0.8, type: "spring" }}

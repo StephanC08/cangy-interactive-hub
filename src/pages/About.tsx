@@ -9,10 +9,12 @@ import AboutApproach from '@/components/about/AboutApproach';
 import AboutServices from '@/components/about/AboutServices';
 import AboutFuture from '@/components/about/AboutFuture';
 import SignatureFooter from '@/components/about/SignatureFooter';
+import { ensureMobileViewport } from '@/lib/utils';
 
 const About = () => {
   useEffect(() => {
     document.title = 'À propos | Stephan CANGY';
+    ensureMobileViewport();
   }, []);
 
   return (

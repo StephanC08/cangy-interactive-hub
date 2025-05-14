@@ -7,6 +7,7 @@ import Appointment from '@/components/Appointment';
 import Testimonials from '@/components/Testimonials';
 import Footer from '@/components/Footer';
 import IntroAnimation from '@/components/IntroAnimation';
+import { ensureMobileViewport } from '@/lib/utils';
 
 const Index = () => {
   useEffect(() => {
@@ -14,6 +15,9 @@ const Index = () => {
     
     // Clear any stored intro animation state to ensure it shows every time
     sessionStorage.removeItem('hasSeenIntro');
+    
+    // Ensure proper mobile viewport settings
+    ensureMobileViewport();
   }, []);
 
   return (
