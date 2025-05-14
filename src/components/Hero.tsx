@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -64,10 +63,11 @@ const Hero: React.FC = () => {
           <div className="md:w-1/2 mt-20 md:mt-0 w-full text-center md:text-left">
             {/* Animated title with letter by letter animation */}
             <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white leading-tight mb-4 w-full"
+              className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white leading-tight mb-4 w-full overflow-visible break-words"
               variants={titleContainer}
               initial="hidden"
               animate="visible"
+              style={{ wordBreak: "keep-all", hyphens: "none" }}
             >
               {title.split('').map((char, index) => (
                 <motion.span
@@ -81,7 +81,7 @@ const Hero: React.FC = () => {
             </motion.h1>
             
             <motion.h2 
-              className="text-xl md:text-2xl text-mauve font-medium mb-6"
+              className="text-xl md:text-2xl text-mauve font-medium mb-6 overflow-visible"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.5, duration: 0.8 }}

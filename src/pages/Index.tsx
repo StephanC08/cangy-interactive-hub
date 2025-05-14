@@ -18,10 +18,17 @@ const Index = () => {
     
     // Ensure proper mobile viewport settings
     ensureMobileViewport();
+
+    // Force update the viewport meta tag for mobile devices
+    const viewportMeta = document.querySelector('meta[name="viewport"]');
+    if (viewportMeta) {
+      viewportMeta.setAttribute('content', 
+        'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover');
+    }
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-noir text-white">
+    <div className="flex flex-col min-h-screen bg-noir text-white overflow-x-hidden">
       <IntroAnimation />
       <Navbar />
       <main className="flex-grow">
