@@ -64,7 +64,7 @@ const Hero: React.FC = () => {
           <div className="md:w-1/2 mt-20 md:mt-0 w-full text-center md:text-left">
             {/* Animated title with letter by letter animation */}
             <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white leading-tight mb-4"
+              className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white leading-tight mb-4 w-full"
               variants={titleContainer}
               initial="hidden"
               animate="visible"

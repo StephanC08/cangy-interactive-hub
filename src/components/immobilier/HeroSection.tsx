@@ -8,7 +8,7 @@ const HeroSection = () => {
     <section className="bg-noir-dark py-20">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2">
+          <div className="md:w-1/2 w-full text-center md:text-left">
             <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">
               Conseil <span className="mauve-gradient-text">Immobilier</span>
             </h1>
@@ -17,13 +17,15 @@ const HeroSection = () => {
               Que vous recherchiez une résidence principale, un investissement locatif ou un bien à rénover, 
               je vous accompagne dans toutes les étapes de votre projet.
             </p>
-            <div className="flex items-center space-x-2 mb-4">
+            <div className="flex items-center justify-center md:justify-start space-x-2 mb-4">
               <MapPin className="text-mauve" />
               <span>Thonon-les-Bains et environs (50 km)</span>
             </div>
-            <Button className="btn-primary">
-              Prendre rendez-vous
-            </Button>
+            <div className="flex justify-center md:justify-start">
+              <Button className="btn-primary">
+                Prendre rendez-vous
+              </Button>
+            </div>
           </div>
           <div className="md:w-1/2 mt-10 md:mt-0">
             <div className="relative">
