@@ -14,7 +14,7 @@ const AboutHero = () => {
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto text-center w-full"
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-6 w-full">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-6 w-full overflow-visible whitespace-nowrap md:whitespace-normal px-1">
             <span className="mauve-gradient-text">À propos</span> de moi
           </h1>
           <p className="text-xl text-gray-300 mb-8">
