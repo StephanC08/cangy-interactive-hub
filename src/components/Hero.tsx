@@ -3,9 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Hero: React.FC = () => {
   const [greeting, setGreeting] = useState('');
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     // Set dynamic greeting based on time of day
@@ -52,7 +54,9 @@ const Hero: React.FC = () => {
     }
   };
 
-  const title = "Entrepreneur & Infopreneur";
+  // Split the title for mobile display
+  const titleFirstPart = "Entrepreneur";
+  const titleSecondPart = "& Infopreneur";
   
   return (
     <section className="min-h-screen bg-noir-dark flex items-center relative overflow-hidden">
@@ -62,24 +66,61 @@ const Hero: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 py-12 md:py-0 z-10 w-full">
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mt-20 md:mt-0 w-full text-center md:text-left">
-            {/* Animated title with letter by letter animation */}
-            <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white leading-tight mb-4 w-full overflow-visible whitespace-nowrap md:whitespace-normal px-1"
-              variants={titleContainer}
-              initial="hidden"
-              animate="visible"
-              style={{ wordBreak: "keep-all", hyphens: "none" }}
-            >
-              {title.split('').map((char, index) => (
-                <motion.span
-                  key={index}
-                  variants={titleChar}
-                  className={char === '&' ? "mauve-gradient-text" : ""}
+            {/* Animated title with mobile-responsive layout */}
+            {isMobile ? (
+              <motion.div
+                className="overflow-visible px-1 mb-4"
+                variants={titleContainer}
+                initial="hidden"
+                animate="visible"
+              >
+                <motion.h1 
+                  className="text-4xl font-heading font-bold text-white leading-tight"
+                  style={{ wordBreak: "keep-all", hyphens: "none" }}
                 >
-                  {char === ' ' ? '\u00A0' : char}
-                </motion.span>
-              ))}
-            </motion.h1>
+                  {titleFirstPart.split('').map((char, index) => (
+                    <motion.span
+                      key={`first-${index}`}
+                      variants={titleChar}
+                    >
+                      {char === ' ' ? '\u00A0' : char}
+                    </motion.span>
+                  ))}
+                </motion.h1>
+                <motion.h1 
+                  className="text-4xl font-heading font-bold leading-tight"
+                  style={{ wordBreak: "keep-all", hyphens: "none" }}
+                >
+                  {titleSecondPart.split('').map((char, index) => (
+                    <motion.span
+                      key={`second-${index}`}
+                      variants={titleChar}
+                      className={char === '&' ? "mauve-gradient-text" : "text-white"}
+                    >
+                      {char === ' ' ? '\u00A0' : char}
+                    </motion.span>
+                  ))}
+                </motion.h1>
+              </motion.div>
+            ) : (
+              <motion.h1 
+                className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white leading-tight mb-4 w-full overflow-visible px-1"
+                variants={titleContainer}
+                initial="hidden"
+                animate="visible"
+                style={{ wordBreak: "keep-all", hyphens: "none" }}
+              >
+                {(titleFirstPart + " " + titleSecondPart).split('').map((char, index) => (
+                  <motion.span
+                    key={index}
+                    variants={titleChar}
+                    className={char === '&' ? "mauve-gradient-text" : ""}
+                  >
+                    {char === ' ' ? '\u00A0' : char}
+                  </motion.span>
+                ))}
+              </motion.h1>
+            )}
             
             <motion.h2 
               className="text-xl md:text-2xl text-mauve font-medium mb-6 overflow-visible"
