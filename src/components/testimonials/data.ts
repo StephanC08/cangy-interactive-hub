@@ -1,0 +1,55 @@
+
+import { Testimonial } from './types';
+
+export const testimonials: Testimonial[] = [
+  {
+    id: 1,
+    name: 'Marie Dupont',
+    position: 'Dirigeante',
+    company: 'Boutique en ligne',
+    content: "Stephan a complètement transformé notre présence en ligne. Notre nouveau site e-commerce est non seulement magnifique mais aussi très performant. Les ventes ont augmenté de 40% en seulement deux mois !",
+    rating: 5,
+    image: '/placeholder.svg',
+    service: 'web',
+  },
+  {
+    id: 2,
+    name: 'Thomas Laurent',
+    position: 'Entrepreneur',
+    company: 'Start-up Tech',
+    content: "Le coaching avec Stephan m'a permis de structurer ma vision et de mettre en place des stratégies efficaces pour développer mon entreprise. Son approche personnalisée et sa disponibilité sont remarquables.",
+    rating: 5,
+    image: '/placeholder.svg',
+    service: 'coaching',
+  },
+  {
+    id: 3,
+    name: 'Sophie Martin',
+    position: 'Propriétaire',
+    company: 'Thonon-les-Bains',
+    content: "Grâce aux conseils de Stephan, j'ai pu vendre ma maison dans des conditions optimales et en un temps record. Son expertise du marché local et sa réactivité ont fait toute la différence.",
+    rating: 4.5,
+    image: '/placeholder.svg',
+    service: 'immobilier',
+  },
+  {
+    id: 4,
+    name: 'Jean Moreau',
+    position: 'Gérant',
+    company: 'Restaurant local',
+    content: "Notre nouveau site web est exactement ce dont nous avions besoin. Stephan a su comprendre nos besoins et créer une interface qui reflète parfaitement l'ambiance de notre restaurant. Merci !",
+    rating: 5,
+    image: '/placeholder.svg',
+    service: 'web',
+  },
+  {
+    id: 5,
+    name: 'Camille Bernard',
+    position: 'Coach sportif',
+    company: 'Indépendante',
+    content: "Le programme de coaching m'a aidé à structurer mon activité et à attirer plus de clients. Les conseils de Stephan sont précieux et très concrets, ce qui est exactement ce dont j'avais besoin.",
+    rating: 4.5,
+    image: '/placeholder.svg',
+    service: 'coaching',
+  },
+];
