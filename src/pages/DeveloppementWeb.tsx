@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -61,6 +60,10 @@ const DeveloppementWeb = () => {
   const [showQuote, setShowQuote] = useState(false);
   const [quoteData, setQuoteData] = useState<z.infer<typeof formSchema> | null>(null);
 
+  useEffect(() => {
+    document.title = 'Développement Web | Stephan CANGY';
+  }, []);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -87,9 +90,9 @@ const DeveloppementWeb = () => {
     <div className="flex flex-col min-h-screen bg-noir text-white">
       <Navbar />
       
-      <main className="flex-grow">
+      <main className="flex-grow pt-24">
         {/* Hero Section */}
-        <section className="pt-24 pb-16 md:pt-32 md:pb-24">
+        <section className="pt-8 pb-16 md:pt-8 md:pb-24">
           <div className="container mx-auto px-6">
             <div className="flex flex-col items-center text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Développement Web</h1>
@@ -98,7 +101,7 @@ const DeveloppementWeb = () => {
               </p>
               <Button onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })} 
                       className="bg-mauve hover:bg-mauve/80 text-white">
-                Demander un devis
+                <span className="text-white">Demander un devis</span>
               </Button>
             </div>
           </div>
@@ -138,7 +141,7 @@ const DeveloppementWeb = () => {
               <Card className="max-w-3xl mx-auto bg-noir-dark border-mauve/20">
                 <CardHeader>
                   <CardTitle className="text-white">Votre Projet</CardTitle>
-                  <CardDescription>Remplissez ce formulaire pour recevoir votre devis personnalisé</CardDescription>
+                  <CardDescription className="text-gray-400">Remplissez ce formulaire pour recevoir votre devis personnalisé</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Form {...form}>
@@ -149,9 +152,9 @@ const DeveloppementWeb = () => {
                           name="name"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Nom complet</FormLabel>
+                              <FormLabel className="text-gray-300">Nom complet</FormLabel>
                               <FormControl>
-                                <Input placeholder="Votre nom" {...field} className="bg-noir border-mauve/20 focus:border-mauve" />
+                                <Input placeholder="Votre nom" {...field} className="bg-noir border-mauve/20 focus:border-mauve text-white" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -162,9 +165,9 @@ const DeveloppementWeb = () => {
                           name="email"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Email</FormLabel>
+                              <FormLabel className="text-gray-300">Email</FormLabel>
                               <FormControl>
-                                <Input placeholder="votre@email.com" {...field} className="bg-noir border-mauve/20 focus:border-mauve" />
+                                <Input placeholder="votre@email.com" {...field} className="bg-noir border-mauve/20 focus:border-mauve text-white" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -177,9 +180,9 @@ const DeveloppementWeb = () => {
                         name="phone"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Téléphone</FormLabel>
+                            <FormLabel className="text-gray-300">Téléphone</FormLabel>
                             <FormControl>
-                              <Input placeholder="Votre numéro de téléphone" {...field} className="bg-noir border-mauve/20 focus:border-mauve" />
+                              <Input placeholder="Votre numéro de téléphone" {...field} className="bg-noir border-mauve/20 focus:border-mauve text-white" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -191,7 +194,7 @@ const DeveloppementWeb = () => {
                         name="projectType"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Type de projet</FormLabel>
+                            <FormLabel className="text-gray-300">Type de projet</FormLabel>
                             <FormControl>
                               <RadioGroup
                                 onValueChange={field.onChange}
@@ -199,20 +202,20 @@ const DeveloppementWeb = () => {
                                 className="grid grid-cols-2 md:grid-cols-4 gap-4"
                               >
                                 <div className="flex items-center space-x-2">
-                                  <RadioGroupItem value="site-vitrine" id="site-vitrine" />
-                                  <Label htmlFor="site-vitrine">Site vitrine</Label>
+                                  <RadioGroupItem value="site-vitrine" id="site-vitrine" className="text-mauve border-mauve/50" />
+                                  <Label htmlFor="site-vitrine" className="text-white">Site vitrine</Label>
                                 </div>
                                 <div className="flex items-center space-x-2">
-                                  <RadioGroupItem value="e-commerce" id="e-commerce" />
-                                  <Label htmlFor="e-commerce">E-commerce</Label>
+                                  <RadioGroupItem value="e-commerce" id="e-commerce" className="text-mauve border-mauve/50" />
+                                  <Label htmlFor="e-commerce" className="text-white">E-commerce</Label>
                                 </div>
                                 <div className="flex items-center space-x-2">
-                                  <RadioGroupItem value="application" id="application" />
-                                  <Label htmlFor="application">Application web</Label>
+                                  <RadioGroupItem value="application" id="application" className="text-mauve border-mauve/50" />
+                                  <Label htmlFor="application" className="text-white">Application web</Label>
                                 </div>
                                 <div className="flex items-center space-x-2">
-                                  <RadioGroupItem value="autre" id="autre" />
-                                  <Label htmlFor="autre">Autre</Label>
+                                  <RadioGroupItem value="autre" id="autre" className="text-mauve border-mauve/50" />
+                                  <Label htmlFor="autre" className="text-white">Autre</Label>
                                 </div>
                               </RadioGroup>
                             </FormControl>
@@ -226,7 +229,7 @@ const DeveloppementWeb = () => {
                         name="budget"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Budget estimé</FormLabel>
+                            <FormLabel className="text-gray-300">Budget estimé</FormLabel>
                             <FormControl>
                               <RadioGroup
                                 onValueChange={field.onChange}
@@ -234,20 +237,20 @@ const DeveloppementWeb = () => {
                                 className="grid grid-cols-2 md:grid-cols-4 gap-4"
                               >
                                 <div className="flex items-center space-x-2">
-                                  <RadioGroupItem value="moins-3000" id="moins-3000" />
-                                  <Label htmlFor="moins-3000">Moins de 3000€</Label>
+                                  <RadioGroupItem value="moins-3000" id="moins-3000" className="text-mauve border-mauve/50" />
+                                  <Label htmlFor="moins-3000" className="text-white">Moins de 3000€</Label>
                                 </div>
                                 <div className="flex items-center space-x-2">
-                                  <RadioGroupItem value="3000-5000" id="3000-5000" />
-                                  <Label htmlFor="3000-5000">3000€ - 5000€</Label>
+                                  <RadioGroupItem value="3000-5000" id="3000-5000" className="text-mauve border-mauve/50" />
+                                  <Label htmlFor="3000-5000" className="text-white">3000€ - 5000€</Label>
                                 </div>
                                 <div className="flex items-center space-x-2">
-                                  <RadioGroupItem value="5000-10000" id="5000-10000" />
-                                  <Label htmlFor="5000-10000">5000€ - 10000€</Label>
+                                  <RadioGroupItem value="5000-10000" id="5000-10000" className="text-mauve border-mauve/50" />
+                                  <Label htmlFor="5000-10000" className="text-white">5000€ - 10000€</Label>
                                 </div>
                                 <div className="flex items-center space-x-2">
-                                  <RadioGroupItem value="plus-10000" id="plus-10000" />
-                                  <Label htmlFor="plus-10000">Plus de 10000€</Label>
+                                  <RadioGroupItem value="plus-10000" id="plus-10000" className="text-mauve border-mauve/50" />
+                                  <Label htmlFor="plus-10000" className="text-white">Plus de 10000€</Label>
                                 </div>
                               </RadioGroup>
                             </FormControl>
@@ -261,7 +264,7 @@ const DeveloppementWeb = () => {
                         name="timeline"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Délai souhaité</FormLabel>
+                            <FormLabel className="text-gray-300">Délai souhaité</FormLabel>
                             <FormControl>
                               <RadioGroup
                                 onValueChange={field.onChange}
@@ -269,20 +272,20 @@ const DeveloppementWeb = () => {
                                 className="grid grid-cols-2 md:grid-cols-4 gap-4"
                               >
                                 <div className="flex items-center space-x-2">
-                                  <RadioGroupItem value="urgent" id="urgent" />
-                                  <Label htmlFor="urgent">Urgent</Label>
+                                  <RadioGroupItem value="urgent" id="urgent" className="text-mauve border-mauve/50" />
+                                  <Label htmlFor="urgent" className="text-white">Urgent</Label>
                                 </div>
                                 <div className="flex items-center space-x-2">
-                                  <RadioGroupItem value="1-3-mois" id="1-3-mois" />
-                                  <Label htmlFor="1-3-mois">1-3 mois</Label>
+                                  <RadioGroupItem value="1-3-mois" id="1-3-mois" className="text-mauve border-mauve/50" />
+                                  <Label htmlFor="1-3-mois" className="text-white">1-3 mois</Label>
                                 </div>
                                 <div className="flex items-center space-x-2">
-                                  <RadioGroupItem value="3-6-mois" id="3-6-mois" />
-                                  <Label htmlFor="3-6-mois">3-6 mois</Label>
+                                  <RadioGroupItem value="3-6-mois" id="3-6-mois" className="text-mauve border-mauve/50" />
+                                  <Label htmlFor="3-6-mois" className="text-white">3-6 mois</Label>
                                 </div>
                                 <div className="flex items-center space-x-2">
-                                  <RadioGroupItem value="flexible" id="flexible" />
-                                  <Label htmlFor="flexible">Flexible</Label>
+                                  <RadioGroupItem value="flexible" id="flexible" className="text-mauve border-mauve/50" />
+                                  <Label htmlFor="flexible" className="text-white">Flexible</Label>
                                 </div>
                               </RadioGroup>
                             </FormControl>
@@ -296,7 +299,7 @@ const DeveloppementWeb = () => {
                         name="description"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Description du projet</FormLabel>
+                            <FormLabel className="text-gray-300">Description du projet</FormLabel>
                             <FormControl>
                               <Textarea
                                 placeholder="Décrivez votre projet, vos besoins spécifiques et toute autre information pertinente"
@@ -310,7 +313,7 @@ const DeveloppementWeb = () => {
                       />
 
                       <Button type="submit" className="w-full bg-mauve hover:bg-mauve/80">
-                        Recevoir mon devis
+                        <span className="text-white">Recevoir mon devis</span>
                       </Button>
                     </form>
                   </Form>
@@ -322,7 +325,7 @@ const DeveloppementWeb = () => {
                   <div className="flex justify-between items-start">
                     <div>
                       <CardTitle className="text-white">Votre Devis Personnalisé</CardTitle>
-                      <CardDescription>Sur la base des informations fournies</CardDescription>
+                      <CardDescription className="text-gray-400">Sur la base des informations fournies</CardDescription>
                     </div>
                     <Button 
                       variant="ghost" 
@@ -330,11 +333,11 @@ const DeveloppementWeb = () => {
                       onClick={() => {setEmailSubmitted(false); setShowQuote(false)}}
                       className="hover:bg-mauve/10"
                     >
-                      <X className="h-5 w-5" />
+                      <X className="h-5 w-5 text-white" />
                     </Button>
                   </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="text-white">
                   <div className="space-y-6">
                     <div className="flex items-center justify-center py-8">
                       <CheckCircle className="h-16 w-16 text-mauve" />

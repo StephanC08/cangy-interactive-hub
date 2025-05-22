@@ -1,141 +1,234 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 0 0% 7%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 7%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 7%;
-
-    --primary: 265 65% 60%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 0 0% 12%;
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
-
-    --muted: 0 0% 90%;
-    --muted-foreground: 0 0% 45%;
-
-    --accent: 265 65% 60%;
-    --accent-foreground: 0 0% 7%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 88%;
-    --input: 0 0% 85%;
-    --ring: 265 65% 60%;
-
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 0 0% 7%;
-    --foreground: 0 0% 95%;
-
-    --card: 0 0% 9%;
-    --card-foreground: 0 0% 95%;
-
-    --popover: 0 0% 9%;
-    --popover-foreground: 0 0% 95%;
-
-    --primary: 265 65% 60%;
-    --primary-foreground: 0 0% 9%;
-
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 95%;
-
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
-
-    --accent: 265 65% 60%;
-    --accent-foreground: 0 0% 9%;
-
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 95%;
-
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 265 65% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --mauve: 260 29.4% 74.5%;
+    --gold: 41 100% 50%;
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
   body {
-    @apply bg-noir text-foreground font-sans antialiased scroll-smooth;
+    @apply bg-noir text-white antialiased font-sans overflow-x-hidden;
   }
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold;
+  
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-noir-dark;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-mauve/30 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-mauve/50;
+  }
+  
+  input, textarea, select {
+    @apply text-white !important;
+  }
+  
+  /* Fix for radio buttons and checkboxes */
+  input[type="radio"],
+  input[type="checkbox"] {
+    @apply text-mauve border-mauve/50;
+  }
+  
+  /* Focus state for form elements */
+  input:focus, textarea:focus, select:focus {
+    @apply border-mauve outline-none ring-1 ring-mauve/50;
+  }
+  
+  /* Improve card styling */
+  .card {
+    @apply border-mauve/20 bg-noir-dark;
+  }
+
+  /* Dropdown and Select menus */
+  .select-menu, 
+  .dropdown-menu,
+  [data-radix-popper-content-wrapper] {
+    @apply bg-noir-dark border border-mauve/20 text-white z-50;
+  }
+  
+  /* Form specific styling */
+  label {
+    @apply text-gray-300;
+  }
+
+  /* Tailwind CSS doesn't remove these */
+  button, [type='button'], [type='reset'], [type='submit'] {
+    @apply text-white;
   }
 }
 
 @layer components {
   .section-title {
-    @apply text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-6 relative;
+    @apply text-3xl font-bold text-white relative pb-4 inline-block;
   }
   
   .section-title::after {
-    @apply content-[''] absolute left-0 -bottom-2 w-20 h-1 bg-mauve;
-  }
-  
-  .section-subtitle {
-    @apply text-xl md:text-2xl font-heading font-semibold text-mauve mb-4;
-  }
-  
-  .container-section {
-    @apply container mx-auto px-6 py-16 md:py-24;
+    content: "";
+    @apply block absolute bottom-0 left-0 w-12 h-1 bg-mauve;
   }
   
   .btn-primary {
-    @apply bg-mauve hover:bg-mauve-dark text-white font-semibold py-3 px-6 rounded-md transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2;
+    @apply bg-mauve hover:bg-mauve/80 text-white;
   }
   
   .btn-secondary {
-    @apply bg-transparent hover:bg-noir-light text-mauve border border-mauve font-semibold py-3 px-6 rounded-md transition-all duration-300;
-  }
-
-  .card-service {
-    @apply bg-noir-light border border-mauve/10 p-6 rounded-lg transition-all duration-300 hover:shadow-[0_0_15px_rgba(126,105,171,0.15)] hover:border-mauve/30;
+    @apply border border-mauve text-mauve hover:bg-mauve hover:text-white;
   }
   
-  .animation-delay-100 {
-    animation-delay: 100ms;
+  /* Mauve gradient text */
+  .mauve-gradient-text {
+    @apply text-transparent bg-clip-text;
+    background-image: linear-gradient(to right, #9b87f5, #d8b4fe);
   }
   
-  .animation-delay-200 {
-    animation-delay: 200ms;
+  /* Custom background colors */
+  .bg-noir {
+    @apply bg-[#121212];
   }
   
-  .animation-delay-300 {
-    animation-delay: 300ms;
+  .bg-noir-light {
+    @apply bg-[#1a1a1a];
   }
   
-  .animation-delay-400 {
-    animation-delay: 400ms;
+  .bg-noir-dark {
+    @apply bg-[#0a0a0a];
+  }
+  
+  /* Custom text colors */
+  .text-mauve {
+    @apply text-[#9b87f5];
+  }
+  
+  .text-mauve-light {
+    @apply text-[#d8b4fe];
+  }
+  
+  .text-gold {
+    @apply text-amber-500;
   }
 }
 
-.hero-gradient {
-  background: linear-gradient(to right, rgba(18, 18, 18, 0.9), rgba(18, 18, 18, 0.7)), url('/hero-bg.jpg');
-  background-size: cover;
-  background-position: center;
+/* Custom animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.mauve-gradient-text {
-  background: linear-gradient(90deg, #9B87F5, #7E69AB, #6E59A5);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-subtle-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Fix for various UI components */
+.MuiOutlinedInput-root,
+.MuiFilledInput-root,
+.MuiInput-root {
+  @apply text-white border-mauve/50;
+}
+
+.MuiInputLabel-root {
+  @apply text-gray-300;
+}
+
+/* Dropdown and Select menus from shadcn */
+[data-radix-popper-content-wrapper] {
+  @apply z-50 !important;
+}
+
+/* Specific fix for shadcn dropdowns */
+.Select-menu > div,
+[role="listbox"] {
+  @apply bg-noir-dark text-white !important;
+}
+
+/* Fix for radio buttons in forms */
+.radio-group-item {
+  @apply text-mauve border-mauve/50 !important;
+}
+
+/* Fix for MapSection.tsx */
+#google-map {
+  @apply z-10 !important;
+}
+
+/* Override for all form inputs - ensuring text is visible */
+input::placeholder, textarea::placeholder {
+  @apply text-gray-500 !important;
+}
+
+/* Ensure text is visible in inputs and selects */
+.radix-placeholder, [aria-selected="true"] {
+  @apply text-white !important;
+}
+
+/* Fix for dropdown items */
+[role="option"] {
+  @apply text-white hover:bg-mauve/20 !important;
+}
+
+/* Fix testimonial cards text and rating stars */
+.testimonial-rating svg {
+  @apply text-amber-400 !important;
+}
+
+.testimonial-text, .testimonial-author {
+  @apply text-white !important;
+}
+
+/* Fix button text colors in all contexts */
+button span, 
+[role="button"] span,
+a.btn span,
+.btn span {
+  @apply text-current !important;
 }

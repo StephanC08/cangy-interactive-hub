@@ -148,11 +148,11 @@ const Hero: React.FC = () => {
             >
               <Button 
                 onClick={scrollToServices} 
-                className="btn-primary relative overflow-hidden group"
+                className="btn-primary relative overflow-hidden group text-white"
               >
-                <span className="relative z-10">
-                  Découvrir mes services
-                  <ArrowRight size={16} />
+                <span className="relative z-10 flex items-center">
+                  <span className="mr-1">Découvrir mes services</span>
+                  <ArrowRight size={16} className="ml-1" />
                 </span>
                 <span className="absolute inset-0 bg-white/10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
               </Button>
@@ -160,7 +160,7 @@ const Hero: React.FC = () => {
               <Button 
                 onClick={scrollToAppointment} 
                 variant="outline" 
-                className="btn-secondary relative overflow-hidden group"
+                className="btn-secondary relative overflow-hidden group text-white"
               >
                 <span className="relative z-10">Prendre rendez-vous</span>
                 <span className="absolute inset-0 bg-mauve/10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>

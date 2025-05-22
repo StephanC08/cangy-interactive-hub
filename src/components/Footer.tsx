@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
               Entrepreneur et infopreneur spécialisé en développement web, coaching et conseil immobilier à Thonon-les-Bains et sa région.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-gold transition-colors">
+              <a href="https://www.instagram.com/stephancangy.pro/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gold transition-colors">
                 <Instagram size={20} />
               </a>
               <a href="#" className="text-gray-400 hover:text-gold transition-colors">
@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
               <a href="#" className="text-gray-400 hover:text-gold transition-colors">
                 <Twitter size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-gold transition-colors">
+              <a href="https://www.facebook.com/profile.php?id=61575010976385" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gold transition-colors">
                 <Facebook size={20} />
               </a>
             </div>
@@ -37,13 +37,13 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-medium mb-4">Services</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-gray-400 hover:text-gold transition-colors">Développement Web</a>
+                <a href="/developpement-web" className="text-gray-400 hover:text-gold transition-colors">Développement Web</a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-gold transition-colors">Coaching & Accompagnement</a>
+                <a href="/coaching" className="text-gray-400 hover:text-gold transition-colors">Coaching & Accompagnement</a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-gold transition-colors">Conseil Immobilier</a>
+                <a href="/immobilier" className="text-gray-400 hover:text-gold transition-colors">Conseil Immobilier</a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-gold transition-colors">Formation</a>
@@ -62,8 +62,8 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center">
                 <Phone size={16} className="text-gold mr-2" />
-                <a href="tel:+33612345678" className="text-gray-400 hover:text-gold transition-colors">
-                  +33 6 XX XX XX XX
+                <a href="tel:+33619165110" className="text-gray-400 hover:text-gold transition-colors">
+                  +33 6 19 16 51 10
                 </a>
               </li>
               <li className="flex items-start">

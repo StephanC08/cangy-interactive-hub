@@ -30,6 +30,7 @@ const MissionRentabilite: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    document.title = "Mission Rentabilité | Stephan CANGY";
   }, [step]);
 
   const updateInvestmentDetails = (details: Partial<InvestmentDetails>) => {
@@ -79,7 +80,7 @@ const MissionRentabilite: React.FC = () => {
     <div className="bg-noir min-h-screen text-white">
       <Navbar />
       
-      <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 py-24">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-3">Mission Rentabilité</h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">

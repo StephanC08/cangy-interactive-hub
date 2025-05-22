@@ -78,11 +78,11 @@ const MapSection = () => {
             <div 
               ref={mapRef} 
               className="h-full w-full" 
-              style={{ display: isLoading ? 'none' : 'block' }}
+              style={{ display: isLoading ? 'none' : 'block', zIndex: 10 }}
               id="google-map"
             />
             
-            <div className="absolute bottom-4 left-4 bg-noir-dark/80 p-3 rounded-lg border border-mauve/30 backdrop-blur-sm">
+            <div className="absolute bottom-4 left-4 bg-noir-dark/80 p-3 rounded-lg border border-mauve/30 backdrop-blur-sm z-20">
               <div className="flex items-center gap-2 text-sm text-white">
                 <div className="w-3 h-3 rounded-full bg-mauve"></div>
                 <span>Prix au m² par commune</span>

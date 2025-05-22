@@ -38,6 +38,24 @@ const AboutStory = () => {
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
             >
+              <motion.div
+                className="mb-8 relative"
+                variants={fadeInUpVariants}
+                custom={0.5}
+              >
+                <div className="w-64 h-64 md:w-72 md:h-72 bg-mauve/10 rounded-full absolute -top-4 -left-4 z-0"></div>
+                <img 
+                  src="/lovable-uploads/a0bca79c-615a-4b2f-9c67-101f7f821c66.png"
+                  alt="Stephan CANGY" 
+                  className="w-64 h-64 md:w-72 md:h-72 object-cover object-top rounded-full border-4 border-mauve/30 relative z-10"
+                />
+                <div className="absolute -bottom-2 right-0 md:right-12 bg-noir-light border border-mauve px-4 py-2 rounded-full z-20 max-w-[220px]">
+                  <span className="text-mauve font-medium text-xs italic">
+                    "L'excellence est une discipline, pas un hasard."
+                  </span>
+                </div>
+              </motion.div>
+              
               <motion.p 
                 className="text-gray-300 mb-6"
                 variants={fadeInUpVariants}
@@ -53,14 +71,6 @@ const AboutStory = () => {
               >
                 J'ai grandi et étudié à Monaco, où j'ai vécu pendant 20 ans.
               </motion.p>
-              
-              <motion.p 
-                className="text-gray-300 mb-6"
-                variants={fadeInUpVariants}
-                custom={3}
-              >
-                C'est là, à seulement 12 ans, qu'un ordinateur est venu bouleverser mon quotidien. À une époque où Internet balbutiait encore, je me découvre une véritable passion pour l'informatique. En autodidacte, j'apprends à coder, à comprendre les systèmes, à explorer les possibilités du web... jusqu'à m'initier au hacking éthique — non pas pour nuire, mais pour comprendre, repousser les limites, apprendre plus vite que les autres.
-              </motion.p>
             </motion.div>
             
             <motion.div 
@@ -68,7 +78,15 @@ const AboutStory = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
-            >
+            >  
+              <motion.p 
+                className="text-gray-300 mb-6"
+                variants={fadeInUpVariants}
+                custom={3}
+              >
+                C'est là, à seulement 12 ans, qu'un ordinateur est venu bouleverser mon quotidien. À une époque où Internet balbutiait encore, je me découvre une véritable passion pour l'informatique. En autodidacte, j'apprends à coder, à comprendre les systèmes, à explorer les possibilités du web... jusqu'à m'initier au hacking éthique — non pas pour nuire, mais pour comprendre, repousser les limites, apprendre plus vite que les autres.
+              </motion.p>
+              
               <motion.p 
                 className="text-gray-300 mb-6"
                 variants={fadeInUpVariants}
