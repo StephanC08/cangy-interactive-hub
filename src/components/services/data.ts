@@ -1,10 +1,11 @@
 
+import React from 'react';
 import { Monitor, UserCheck, Home } from 'lucide-react';
 import { Service } from './types';
 
 export const services: Service[] = [
   {
-    icon: <Monitor />,
+    icon: React.createElement(Monitor),
     title: "Développement Web",
     description: "Des sites web performants, élégants et centrés sur vos objectifs business.",
     features: ["Sites vitrines", "E-commerce", "Applications web", "Refonte et optimisation"],
@@ -13,7 +14,7 @@ export const services: Service[] = [
     experienceText: "Design ton site idéal"
   },
   {
-    icon: <UserCheck />,
+    icon: React.createElement(UserCheck),
     title: "Coaching",
     description: "Un accompagnement personnalisé pour révéler votre potentiel et atteindre vos objectifs.",
     features: ["Vision claire", "Stratégie d'action", "Développement personnel", "Suivi et ajustement"],
@@ -22,7 +23,7 @@ export const services: Service[] = [
     experienceText: "Débloque ton prochain niveau"
   },
   {
-    icon: <Home />,
+    icon: React.createElement(Home),
     title: "Conseil Immobilier",
     description: "Des solutions immobilières adaptées à vos projets dans la région du Chablais.",
     features: ["Achat", "Vente", "Investissement", "Stratégie patrimoniale"],
